@@ -83,3 +83,8 @@ public class Main {
 
     }
 }
+
+/*
+what different between nextToken and nextElement ?
+Can change Array size with lambda Expressions?
+*/

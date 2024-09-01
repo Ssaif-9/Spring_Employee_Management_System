@@ -61,7 +61,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int SearchNum = Integer.parseInt(args[0]);
+        int SearchNum = Integer.parseInt(args[0]);          //why do not accept (int) args[0]
 
         Main module = new Main();
         Random rand = new Random();
