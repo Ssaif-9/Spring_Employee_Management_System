@@ -36,12 +36,7 @@ public class InputQuadratic {
     }
 
     public void inputEquation( ) {
-        System.out.printf("Our Quadratic Equation : %fX^2 + %fX + %f = 0 ",getFirstParameter(), getSecondParameter(),getThirdParameter());
+        System.out.printf("Our Quadratic Equation : %fX^2 + %fX + %f = 0 \n",getFirstParameter(), getSecondParameter(),getThirdParameter());
     }
-
-
-
-
-
 
 }
