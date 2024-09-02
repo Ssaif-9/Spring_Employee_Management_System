@@ -1,6 +1,8 @@
 public class OutputQuadratic {
     private double firstOutput;
     private double secondOutput;
+    private Complex firstComplexOutput;
+    private Complex secondComplexOutput;
 
     public double getFirstOutput() {
         return firstOutput;
@@ -8,6 +10,11 @@ public class OutputQuadratic {
 
     public void setFirstOutput(double firstOutput) {
         this.firstOutput = firstOutput;
+    }
+
+    public void setFirstOutput(Complex firstOutput) {
+
+        this.firstComplexOutput = firstComplexOutput;
     }
 
     public void setSecondOutput(double secondOutput) {
