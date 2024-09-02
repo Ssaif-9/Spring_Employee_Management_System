@@ -2,7 +2,8 @@
 
     public class Main {
 
-        public void calculateQuadraticEquation(InputQuadratic input ,OutputQuadratic output){
+        private static OutputQuadratic calculateQuadraticEquation(InputQuadratic input ){
+            OutputQuadratic output = new OutputQuadratic();
             double  firstOutput;
             double firstUnderRoot =(Math.pow(input.getSecondParameter(),2)-(4*input.getFirstParameter()*input.getThirdParameter()));
 
@@ -42,16 +43,15 @@
                 output.setSecondComplexOutput(SecondComplexResult);
 
             }
-
+return output;
         }
         public static void main(String[] args) {
-            Main main = new Main();
-            InputQuadratic inputObject = new InputQuadratic(1,-3,28);
-            OutputQuadratic outputObject = new OutputQuadratic();
+            InputQuadratic inputObject = new InputQuadratic(1,.3,28);
+            OutputQuadratic outputObject;
 
-            Function<InputQuadratic, OutputQuadratic> Calc=  (InputQuadratic) -> { main.calculateQuadraticEquation(inputObject,outputObject); return null; };      //why Calc= (InputQuadratic)
+            Function<InputQuadratic,OutputQuadratic> calc= Main::calculateQuadraticEquation;      //calc=  (input) -> {  return calculateQuadraticEquation(input);};
 
-            Calc.apply(inputObject);
+            outputObject= calc.apply(inputObject);
             inputObject.inputEquation();
             outputObject.printComplexOutput();
         }
