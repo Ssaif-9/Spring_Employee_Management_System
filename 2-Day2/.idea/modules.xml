@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../1-Day1/1-Day1.iml" filepath="$PROJECT_DIR$/../1-Day1/1-Day1.iml" />
       <module fileurl="file://$PROJECT_DIR$/2-Day2.iml" filepath="$PROJECT_DIR$/2-Day2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Task1/Task1.iml" filepath="$PROJECT_DIR$/Task1/Task1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Task2/Task2.iml" filepath="$PROJECT_DIR$/Task2/Task2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2-Task1/2-Task1.iml" filepath="$PROJECT_DIR$/2-Task1/2-Task1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2-Task2/2-Task2.iml" filepath="$PROJECT_DIR$/2-Task2/2-Task2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../3-Day3/3-Day3.iml" filepath="$PROJECT_DIR$/../3-Day3/3-Day3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../3-Day3/3-Task1/3-Task1.iml" filepath="$PROJECT_DIR$/../3-Day3/3-Task1/3-Task1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../1-Day1/Task1/Task1.iml" filepath="$PROJECT_DIR$/../1-Day1/Task1/Task1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../1-Day1/Task2/Task2.iml" filepath="$PROJECT_DIR$/../1-Day1/Task2/Task2.iml" />
     </modules>
   </component>
 </project>
