@@ -1,0 +1,12 @@
+package core;
+
+import java.lang.annotation.*;
+//An annotation type declaration. 
+
+@Retention(RetentionPolicy.RUNTIME)
+
+public interface MyAnno {
+	String str();
+	int	val();
+
+}

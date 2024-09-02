@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;QuoteFxApp.java&apos; to &apos;JPMS/src/core.fx&apos;&#x0D;&#x0A;- Original project: &apos;JPMS&apos;&#x0D;&#x0A;- Destination element: &apos;JPMS/src/core.fx&apos;&#x0D;&#x0A;- Original element: &apos;core.modules.QuoteFxApp.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;core.fx" element1="/src&lt;core.modules{QuoteFxApp.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1705706464843" units="1" version="1.0"/>
+</session>

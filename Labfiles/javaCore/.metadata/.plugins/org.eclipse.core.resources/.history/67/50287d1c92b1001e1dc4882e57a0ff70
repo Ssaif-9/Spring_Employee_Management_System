@@ -1,0 +1,11 @@
+package core;
+
+public class TryMe {
+	@MyAnno(str = "Annotation Example", val = 100)
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+}

@@ -1,0 +1,20 @@
+package core;
+
+public class ControStatement {
+
+	public static void main(String[] args) {
+		int month = 4; // April
+		String season;
+
+		int x,y;
+		if (x < y) {
+			System.out.println("x i s less than y");
+		} else {
+			System.out.println("x i s either equals y or greater than y");
+		}
+		
+		
+
+	}
+
+}

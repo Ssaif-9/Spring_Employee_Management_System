@@ -1,0 +1,14 @@
+package core;
+
+public class Square extends Shape {
+	@Override
+	public void draw(int x, int y) {
+		// TODO Auto-generated method stub
+		super.draw(x, y);
+	}
+	public void draw(int x, int y, int x2, int y2 ){
+		
+		this.draw(5,6);
+	}
+
+}

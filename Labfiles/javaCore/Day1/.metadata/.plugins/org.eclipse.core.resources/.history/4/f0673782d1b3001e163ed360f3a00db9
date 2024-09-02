@@ -1,0 +1,16 @@
+package core;
+
+public class ControStatement {
+
+	public static void main(String[] args) {
+		
+		int x=10,y=20;
+		if (x < y) {
+			System.out.println("x i s less than y");
+		} else {
+			System.out.println("x i s either equals y or greater than y");
+		}
+
+	}
+
+}

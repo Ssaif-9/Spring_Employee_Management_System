@@ -1,0 +1,13 @@
+package core;
+import	java.lang.annotation.*;
+
+import javax.print.DocFlavor.STRING;
+//An annotation type declaration. 
+
+@SuppressWarnings(STRING)
+
+public interface MyAnno {
+	String str();
+	int	val();
+
+}

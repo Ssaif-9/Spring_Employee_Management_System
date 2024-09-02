@@ -1,0 +1,13 @@
+INDEX VERSION 1.134
+C:\labfiles\jWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2583119674.index
+\Ch02-Examples\src
+C:\labfiles\jWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3838205488.index
+\Ch08-Solutions\src
+C:\labfiles\jWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3036738993.index
+\Ch02-Solutions-Lab1\src
+C:\labfiles\jWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3265144641.index
+\Ch02-Solutions-Lab2\src
+C:\labfiles\jWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3732435707.index
+\NewJSP\src\main\java
+C:\labfiles\jWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4197854437.index
+\Ch08-Solutions\src

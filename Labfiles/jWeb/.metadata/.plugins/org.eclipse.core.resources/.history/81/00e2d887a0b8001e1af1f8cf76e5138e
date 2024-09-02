@@ -1,0 +1,152 @@
+// File: ArticleServlet.java
+
+package blognews;
+
+import jakarta.servlet.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.File;
+import java.util.Date;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.ArrayList;
+
+@WebServlet(urlPatterns = {"/Article/*"})
+public class ArticleServlet extends HttpServlet {
+  private ArticleFactory articleFactory = null;
+  private ArticleDateComparator articleDateComparator =
+    new ArticleDateComparator();
+
+  @Override
+  public void init() throws ServletException {
+    String path = getServletContext().getRealPath("/WEB-INF/articles");
+
+    File articleDir = null;
+    if (path == null) {
+      articleDir = new File(".");
+    }
+    else {
+      articleDir = new File(path);
+      if (!articleDir.exists()) {
+        if (!articleDir.mkdir()) {
+          throw new
+            ServletException("Failed creating directory " +
+              articleDir);
+        }
+      }
+    }
+    articleFactory = new ArticleFactory(articleDir);
+  }
+
+  @Override
+  public void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    // String command = getCommand(req);
+    String command = null;
+    // The next line will throw a NullPointerException
+    if (command.equals("/List")) {
+      listArticles(req, resp);
+    }
+    else {
+      resp.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+    }
+  }
+
+  @Override
+  public void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    String command = getCommand(req);
+    if (command.equals("/Post")) {
+      createArticle(req, resp);
+    }
+    else if (command.equals("/View")) {
+      viewArticle(req, resp);
+    }
+    else {
+      resp.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+    }
+  }
+
+  private void createArticle(HttpServletRequest req,
+    HttpServletResponse resp) throws ServletException, IOException {
+
+    Date date = new Date();
+    String title = req.getParameter("title");
+    String body = req.getParameter("body");
+
+    if (title == null || title.length() == 0
+        || body == null || body.length() == 0) {
+      // Invalid entry - send to reject page
+      req.getRequestDispatcher("/BadPostArticle.html")
+        .forward(req, resp);
+    }
+    else {
+      Article art = new Article(title, date, body);
+      articleFactory.writeArticle(art);
+      showArticle(req, resp, art);
+    }
+  }
+
+  private void viewArticle(HttpServletRequest req,
+    HttpServletResponse resp) throws ServletException, IOException {
+
+    String title = req.getParameter("title");
+    if (title == null || title.length() == 0) {
+      // Invalid entry - send to reject page
+      req.getRequestDispatcher("/BadPostArticle.html")
+        .forward(req, resp);
+    }
+    else {
+      try {
+        Article art = articleFactory.getArticle(title);
+        showArticle(req, resp, art);
+      }
+      catch (ArticleNotFoundException ex) {
+        req.setAttribute("exception", ex);
+        req.getRequestDispatcher("/ArticleNotFound.jsp")
+          .forward(req, resp);
+      }
+    }
+  }
+
+  private void listArticles(HttpServletRequest req,
+    HttpServletResponse resp) throws ServletException, IOException {
+
+    ArrayList<Article> articles = articleFactory.getArticleList();
+    Collections.sort(articles, articleDateComparator);
+    req.setAttribute("articleList", articles);
+    req.getRequestDispatcher("/ListArticles.jsp").forward(req, resp);
+  }
+
+  /*
+   * Forward the request to the ShowArticle view with the article bean
+   */
+  private void showArticle(HttpServletRequest req,
+    HttpServletResponse resp, Article art)
+      throws ServletException, IOException {
+    req.setAttribute("article", art);
+    req.getRequestDispatcher("/ShowArticle.jsp").forward(req, resp);
+  }
+
+  /*
+   * Get the command from the request. The command is passed as the
+   * extra path information in the request URL.
+   */
+  private String getCommand(HttpServletRequest req) {
+    return req.getPathInfo();
+  }
+}
+
+/**
+ * This Comparator compares the dates of two articles to allow for
+ * sort by reverse date order.
+ **/
+class ArticleDateComparator implements Comparator<Article> {
+  public int compare(Article article1, Article article2) {
+    return -(article1.getDate().compareTo(article2.getDate()));
+  }
+}

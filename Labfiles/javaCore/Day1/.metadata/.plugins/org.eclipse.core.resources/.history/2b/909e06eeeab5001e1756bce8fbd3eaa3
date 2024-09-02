@@ -1,0 +1,28 @@
+package core.jdbc;
+
+import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class FirstDatabaseApp {
+
+	public FirstDatabaseApp() {
+		try {
+			ResultSet rs = stmt.executeQuery(queryString);
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
+			}
+			stmt.close();
+			con.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

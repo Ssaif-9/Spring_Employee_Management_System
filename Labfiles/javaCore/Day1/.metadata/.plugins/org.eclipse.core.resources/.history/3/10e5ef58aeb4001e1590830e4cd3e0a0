@@ -1,0 +1,11 @@
+package core.annotation;
+import java.lang.annotation.*;
+//An annotation type declaration. 
+
+@Retention(RetentionPolicy.CLASS)
+
+public interface MyAnnotation {
+	String str();
+	int	val();
+
+}

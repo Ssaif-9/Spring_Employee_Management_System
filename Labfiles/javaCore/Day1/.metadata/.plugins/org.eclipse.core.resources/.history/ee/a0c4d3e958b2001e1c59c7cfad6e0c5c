@@ -1,0 +1,10 @@
+package core.stream.api;
+
+public class EmployeeRepository {
+public List<Employee> findById(){
+	
+	
+	return list;
+	
+}
+}

@@ -1,0 +1,12 @@
+package core;
+
+import java.lang.annotation.*;
+//An annotation type declaration. 
+
+@Deprecated()
+
+public interface MyAnno {
+	String str();
+	int	val();
+
+}

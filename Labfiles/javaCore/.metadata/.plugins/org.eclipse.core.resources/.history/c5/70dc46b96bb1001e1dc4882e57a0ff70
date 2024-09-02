@@ -1,0 +1,14 @@
+package core;
+
+import java.lang.annotation.*;
+//An annotation type declaration. 
+
+@FunctionalInterface()
+
+public interface MyAnno extends Annotation {
+	static String str(int i) {
+		return null;
+		
+	};
+	
+}

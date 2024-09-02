@@ -1,0 +1,10 @@
+package core.generics;
+
+public class ArrayAlg {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

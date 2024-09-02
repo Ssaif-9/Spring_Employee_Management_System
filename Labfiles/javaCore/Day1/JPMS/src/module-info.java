@@ -1,0 +1,10 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+
+module	core.modules	{
+	}
+

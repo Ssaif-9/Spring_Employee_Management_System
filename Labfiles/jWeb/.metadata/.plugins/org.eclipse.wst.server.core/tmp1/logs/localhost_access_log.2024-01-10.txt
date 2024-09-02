@@ -1,0 +1,12 @@
+127.0.0.1 - - [10/Jan/2024:12:01:58 +0200] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:02:00 +0200] "GET /NewJSP/NewJSTL.jsp HTTP/1.1" 200 989
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:02:00 +0200] "GET /favicon.ico HTTP/1.1" 404 763
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:02:21 +0200] "GET /NewJSP/NewJSTL.jsp?ismail HTTP/1.1" 200 989
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:02:43 +0200] "GET /NewJSP/NewJSTL.jsp?username=ismail HTTP/1.1" 200 995
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:03:01 +0200] "GET /NewJSP/NewJSTL.jsp?username=ismail&password=123 HTTP/1.1" 200 995
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:03:13 +0200] "GET /NewJSP/NewJSTL.jsp?username=ismail&pw=123 HTTP/1.1" 200 998
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:03:29 +0200] "GET /NewJSP/NewJSTL.jsp?username=ismail&pw=123&gender=male HTTP/1.1" 200 1002
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:34:12 +0200] "GET /NewJSP/NewJSTL.jsp HTTP/1.1" 200 1031
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:35:17 +0200] "GET /NewJSP/NewJSTL.jsp HTTP/1.1" 200 1063
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:39:02 +0200] "GET /NewJSP/NewJSTL.jsp HTTP/1.1" 200 1064
+0:0:0:0:0:0:0:1 - - [10/Jan/2024:12:39:37 +0200] "GET /NewJSP/NewJSTL.jsp HTTP/1.1" 200 1075
