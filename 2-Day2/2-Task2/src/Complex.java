@@ -7,7 +7,7 @@ public class Complex {
     public Complex(double real) {
         this.real = real;
     }
-    public Complex(int x,double imag) {
+    public Complex(int x ,double imag) {
         this.imag =imag;
     }
     public Complex(double real, double imag) {
@@ -34,23 +34,23 @@ public class Complex {
         return new Complex(real-c1.getReal(),imag-c2.getImag());
     }
 
-    public void printComplex (Complex complex){
+    public static void printComplex (Complex complex){
         if(complex.getImag()>0&&complex.getReal()>0)
           System.out.printf("%f+%fi",complex.getReal(),complex.getImag());
         else if (complex.getImag()<0 && complex.getReal()<0)
-            System.out.printf("-%f-%fi",complex.getReal(),complex.getImag());
+            System.out.printf("%f%fi",complex.getReal(),complex.getImag());
         if(complex.getImag()<0&&complex.getReal()>0)
-            System.out.printf("%f-%fi",complex.getReal(),complex.getImag());
+            System.out.printf("%f%fi",complex.getReal(),complex.getImag());
         if(complex.getImag()>0&&complex.getReal()<0)
-            System.out.printf("-%f+%fi",complex.getReal(),complex.getImag());
+            System.out.printf("%f+%fi",complex.getReal(),complex.getImag());
         else if (complex.getImag()==0&&complex.getReal()>0)
             System.out.printf("%f",complex.getReal());
         else if (complex.getImag()==0&&complex.getReal()<0)
-            System.out.printf("-%f",complex.getReal());
+            System.out.printf("%f",complex.getReal());
         else if (complex.getReal()==0&&complex.getImag()>0)
             System.out.printf("%f",complex.getImag());
         else if (complex.getReal()==0&&complex.getImag()<0)
-            System.out.printf("-%f",complex.getReal());
+            System.out.printf("%f",complex.getReal());
 
         }
     }

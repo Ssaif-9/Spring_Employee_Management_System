@@ -5,7 +5,7 @@ public class InputQuadratic {
 
     public InputQuadratic(){}
 
-    public InputQuadratic(int firstParameter, int secondParameter, int thirdParameter){
+    public InputQuadratic(double firstParameter, double secondParameter, double thirdParameter){
         this.firstParameter = firstParameter;
         this.secondParameter = secondParameter;
         this.thirdParameter = thirdParameter;
@@ -15,7 +15,7 @@ public class InputQuadratic {
         return firstParameter;
     }
 
-    public void setFirstParameter(int firstParameter) {
+    public void setFirstParameter(double firstParameter) {
         this.firstParameter = firstParameter;
     }
 
@@ -23,7 +23,7 @@ public class InputQuadratic {
         return secondParameter;
     }
 
-    public void setSecondParameter(int secondParameter) {
+    public void setSecondParameter(double secondParameter) {
         this.secondParameter = secondParameter;
     }
 
@@ -31,7 +31,7 @@ public class InputQuadratic {
         return thirdParameter;
     }
 
-    public void setThirdParameter(int thirdParameter) {
+    public void setThirdParameter(double thirdParameter) {
         this.thirdParameter = thirdParameter;
     }
 

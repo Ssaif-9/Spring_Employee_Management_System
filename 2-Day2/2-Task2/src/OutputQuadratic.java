@@ -1,35 +1,31 @@
 public class OutputQuadratic {
-    private double firstOutput;
-    private double secondOutput;
+
     private Complex firstComplexOutput;
     private Complex secondComplexOutput;
 
-    public double getFirstOutput() {
-        return firstOutput;
+    public Complex getFirstComplexOutput() {
+        return firstComplexOutput;
     }
 
-    public void setFirstOutput(double firstOutput) {
-        this.firstOutput = firstOutput;
-    }
-
-    public void setFirstOutput(Complex firstOutput) {
-
+    public void setFirstComplexOutput(Complex firstComplexOutput) {
         this.firstComplexOutput = firstComplexOutput;
     }
 
-    public void setSecondOutput(double secondOutput) {
-        this.secondOutput = secondOutput;
+    public Complex getSecondComplexOutput() {
+        return secondComplexOutput;
     }
 
-    public double getSecondOutput() {
-        return secondOutput;
+    public void setSecondComplexOutput(Complex secondComplexOutput) {
+        this.secondComplexOutput = secondComplexOutput;
     }
-
 
     public OutputQuadratic() {}
 
-    public void printOutput(){
-        System.out.printf("X1= %f \n" , getFirstOutput());
-        System.out.printf("X2= %f \n" , getSecondOutput());
+    public void printComplexOutput(){
+        System.out.print("X1 = ");
+        Complex.printComplex(getFirstComplexOutput());
+        System.out.println();
+        System.out.print("X2 = ");
+        Complex.printComplex(getSecondComplexOutput());
     }
 }
