@@ -36,7 +36,7 @@ public class Complex {
 
     public static void printComplex (Complex complex){
         if(complex.getImag()>0&&complex.getReal()>0)
-          System.out.printf("%f+%fi",complex.getReal(),complex.getImag());
+            System.out.printf("%f+%fi",complex.getReal(),complex.getImag());
         else if (complex.getImag()<0 && complex.getReal()<0)
             System.out.printf("%f%fi",complex.getReal(),complex.getImag());
         if(complex.getImag()<0&&complex.getReal()>0)
@@ -51,6 +51,6 @@ public class Complex {
             System.out.printf("%f",complex.getImag());
         else if (complex.getReal()==0&&complex.getImag()<0)
             System.out.printf("%f",complex.getReal());
-
-        }
     }
+
+}
