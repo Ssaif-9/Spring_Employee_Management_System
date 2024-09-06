@@ -83,4 +83,26 @@ public class DatabsaseConnection {
             System.out.println(ex);
         }
     }
+
+    public void jdbcDeleteRow(String book) {
+        Connection url =null;
+        PreparedStatement stmt = null;
+        int rs = 0;
+
+        try {
+            url=this.jdbcConnection();
+            String Sql ="DELETE FROM book WHERE title = ?";
+            stmt = url.prepareStatement(Sql);
+            stmt.setString(1, book);
+            stmt.executeUpdate();
+
+            System.out.printf("Delete %s book  done",book);
+
+            stmt.close();
+            url.close();
+        }catch(SQLException ex)
+        {
+            System.out.println(ex);
+        }
+    }
 }
