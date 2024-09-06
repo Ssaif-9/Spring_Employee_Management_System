@@ -12,6 +12,27 @@ public class DatabsaseConnection {
         return url;
     }
 
+    public void jdbcListAllBooks()
+    {
+        Connection url = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            url=this.jdbcConnection();
+            statement=url.createStatement();
+            resultSet=statement.executeQuery("select * from book");
+            while(resultSet.next())
+            {
+                System.out.printf("Book ID : %d \t Book Title : %s \t Book Author : %s \t Book Publish Year : %s .\n",resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4));
+
+            }
+
+         statement.close();
+         url.close();
+        }catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 
     public void jdbcGetRow(String book) {
         Connection url = null;

@@ -7,6 +7,6 @@ public class Main {
         //Book book = new Book(4,"Rust","mohsen","2021");
         DatabsaseConnection connection = new DatabsaseConnection();
         //connection.jdbcAddRow(book);
-        connection.jdbcGetRow("java");
+        connection.jdbcListAllBooks();
     }
 }
