@@ -1,12 +1,15 @@
-import java.sql.*;
+import java.sql.Connection;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        //Book book = new Book(4,"Rust","mohsen","2021");
-        DatabsaseConnection connection = new DatabsaseConnection();
+        Book book = new Book(3,"Rust","mohsen","2021");
+        DatabaseConnection connection = new DatabaseConnection();
         //connection.jdbcAddRow(book);
-        connection.jdbcDeleteRow("Rust");
+        //connection.jdbcDeleteRow("Rust");
+        //connection.jdbcGetBook("java");
+        connection.jdbcListAllBooks();
+
     }
 }
