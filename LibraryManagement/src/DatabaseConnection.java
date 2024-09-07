@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.function.Function;
 
 public class DatabaseConnection {
 
@@ -21,9 +22,12 @@ public class DatabaseConnection {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+
         try {
+
             connection=this.jdbcConnection();
             statement=connection.createStatement();
+
             resultSet=statement.executeQuery("select * from book");
             while(resultSet.next())
             {
