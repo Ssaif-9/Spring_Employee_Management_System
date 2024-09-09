@@ -4,12 +4,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Book book = new Book(3,"Rust","mohsen","2021");
+        Book book = new Book(4,"C++","SASA","2026");
         DatabaseConnection connection = new DatabaseConnection();
-        //connection.jdbcAddRow(book);
+        connection.jdbcAddRow(book);
         //connection.jdbcDeleteRow("Rust");
         //connection.jdbcGetBook("java");
-        connection.jdbcListAllBooks();
+        //connection.jdbcListAllBooks();
 
     }
 }
