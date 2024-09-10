@@ -1,6 +1,0 @@
-import core.Level;
-
-public class JavaCore {
-
-	Level myVar = Level.MEDIUM;
-}

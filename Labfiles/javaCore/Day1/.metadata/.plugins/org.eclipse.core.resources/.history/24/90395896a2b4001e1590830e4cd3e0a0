@@ -1,5 +1,0 @@
-package core.annotation;
-
-public enum Level {
-
-}

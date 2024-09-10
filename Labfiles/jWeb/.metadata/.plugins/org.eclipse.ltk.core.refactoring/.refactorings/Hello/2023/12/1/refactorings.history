@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move &apos;Hello.java&apos; to &apos;java&apos;" description="Move &apos;Hello.java&apos; to &apos;java&apos;" destination="src/main/java" element1="/ExampleWeb/src/main/java/Hello.java" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1704050810938" updateReferences="true"/>
-</session>

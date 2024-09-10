@@ -1,8 +1,0 @@
-package core;
-public interface Numbers {
-	
-	int x;
-	int getNext(); // return next number in series void reset(); // restart
-
-	void setStart(int x); // set starting value
-}

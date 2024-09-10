@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Idahshan
- *
- */
-module Solutions {
-}

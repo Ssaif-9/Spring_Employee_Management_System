@@ -1,7 +1,0 @@
-package core.interfaces;
-
-@FunctionalInterface
-public interface MyFirstFunctionalInterface {
-	public void firstWork();
-
-}
