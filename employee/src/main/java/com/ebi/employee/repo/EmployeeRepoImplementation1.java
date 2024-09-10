@@ -12,6 +12,9 @@ public class EmployeeRepoImplementation1 implements EmployeeRepoInterface{
 
     @Override
     public EmployeeDto getEmployee (){
-       return new EmployeeDto(2L,"Abdel Rahman Hassan","18000");
+        EmployeeJdbc employeeJdbc = new EmployeeJdbc();
+        EmployeeDto employeeDto = employeeJdbc.getEmployeeFromDb("8");
+
+       return employeeDto;
     }
 }

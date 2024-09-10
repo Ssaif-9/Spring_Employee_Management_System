@@ -12,6 +12,6 @@ public class EmployeeRepoImplementation2 implements EmployeeRepoInterface {
 
     @Override
    public  EmployeeDto getEmployee (){
-        return new EmployeeDto(1L,"Seif Eldin Sultan","17000");
+        return new EmployeeDto(1,"Seif Eldin ","Sultan","17000");
     }
 }

@@ -23,6 +23,6 @@ public class EmployeeController {
     @PostMapping("/postEmployee")
     @ResponseBody
     public String postEmployee(){
-        return ("User Name  "+ employeeServiceInterface.getEmployee().getName());
+        return ("User Name  : "+ employeeServiceInterface.getEmployee().getFirstName());
     }
 }

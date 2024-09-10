@@ -1,32 +1,42 @@
 package com.ebi.employee.model;
 
 public class EmployeeDto {
-    private Long id;
-    private String name;
+    private int id;
+    private String firstName;
+    private String secondName;
     private String salary;
 
     public EmployeeDto() { }
 
-    public EmployeeDto(Long id, String name, String salary) {
+    public EmployeeDto(int id, String firstName, String secondName, String salary) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.secondName = secondName;
         this.salary = salary;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public String getSalary() {
