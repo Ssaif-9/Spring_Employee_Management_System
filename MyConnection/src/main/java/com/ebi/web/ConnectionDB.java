@@ -10,8 +10,8 @@ public class ConnectionDB {
 
 	    
 	    
-	    public void addEmployee(Employee emp)    {	
-	    	
+	    public int addEmployee(Employee emp)    {	
+	    	int resultSet =0;
 	        try {
 	        	try {
 	        	
@@ -29,7 +29,7 @@ public class ConnectionDB {
 	            statement.setString(4, emp.getSalary());
 	            
 	            
-	            statement.executeUpdate();
+	            resultSet=statement.executeUpdate();
 
 	     
 	            statement.close();
@@ -38,8 +38,6 @@ public class ConnectionDB {
 	        } catch (SQLException sqlEx) {
 	            System.out.println(sqlEx);
 	        } 
+		    return resultSet;
 	    }
-
-	    
-
 }

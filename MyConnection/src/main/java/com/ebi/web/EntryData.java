@@ -1,7 +1,6 @@
 package com.ebi.web;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,7 +36,7 @@ public class EntryData extends HttpServlet {
             "First Name: <input type='text' name='first_name'><br>" +
             "Second Name: <input type='text' name='second_name'><br>" +
             "Salary: <input type='text' name='salary'><br>" +
-            "<input type='submit' value='Profile'>" +
+            "<input type='submit' value='EntryData'>" +
             "</form>" +
             "</body>" +
             "</html>"
@@ -46,6 +45,7 @@ public class EntryData extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Handle login logic
+    	int insertElement=0;
         String stringId = request.getParameter("id");
         String stringFirstName = request.getParameter("first_name");
         String stringSecondName = request.getParameter("second_name");
@@ -62,7 +62,13 @@ public class EntryData extends HttpServlet {
         emp.setSecond_name(stringSecondName);
         emp.setSalary(stringSalary);
         
-        conn.addEmployee(emp);
+        insertElement=conn.addEmployee(emp);
+        
+        if (insertElement==1) {
+            response.getWriter().append("Registration successful! Welcome, " + stringFirstName);
+        } else {
+            response.getWriter().append("Invalid Register. Please try again. " );
+        }
        
        
     }
