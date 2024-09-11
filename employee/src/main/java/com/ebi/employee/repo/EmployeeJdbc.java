@@ -1,6 +1,7 @@
 package com.ebi.employee.repo;
 
 import com.ebi.employee.model.EmployeeDto;
+import com.ebi.employee.model.entity.EmployeeEntity;
 
 
 import java.sql.*;
@@ -11,8 +12,8 @@ public class EmployeeJdbc {
     private String password = "root";
 
 
-    public EmployeeDto getEmployeeFromDb(String id) {
-        EmployeeDto employeeDto = new EmployeeDto();
+    public EmployeeEntity getEmployeeFromDb(String id) {
+        EmployeeEntity employeeEntity = new EmployeeEntity();
         String sqlQuery = "SELECT * FROM employee WHERE id = ?";
 
         try {
@@ -22,16 +23,16 @@ public class EmployeeJdbc {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                employeeDto.setId(resultSet.getInt(1));
-                employeeDto.setFirstName(resultSet.getString(2));
-                employeeDto.setSecondName(resultSet.getString(3));
-                employeeDto.setSalary(resultSet.getString(4));
+                employeeEntity.setId(resultSet.getInt(1));
+                employeeEntity.setFirstName(resultSet.getString(2));
+                employeeEntity.setSecondName(resultSet.getString(3));
+                employeeEntity.setSalary(resultSet.getString(4));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return employeeDto;
+        return employeeEntity;
     }
 
 

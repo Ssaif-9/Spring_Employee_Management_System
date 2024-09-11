@@ -2,27 +2,45 @@ package com.ebi.employee.controller;
 
 import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.service.EmployeeServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/employee")
+@RequiredArgsConstructor
 public class EmployeeController {
 
-    @Autowired
-    EmployeeServiceInterface employeeServiceInterface;
+    private final EmployeeServiceInterface employeeServiceInterface;
 
-    @GetMapping("/getEmployee")
-    @ResponseBody
-    public EmployeeDto getEmployee(){
-        return employeeServiceInterface.getEmployee();
+    @GetMapping
+    public List<EmployeeDto> getAllEmployees(){
+        return employeeServiceInterface.getAllEmployees();
     }
 
-    @PostMapping("/postEmployee")
-    @ResponseBody
-    public String postEmployee(){
-        return ("User Name  : "+ employeeServiceInterface.getEmployee().getFirstName());
+    @GetMapping("/{id}")
+    public EmployeeDto getEmployeeById(@PathVariable int id){
+        return employeeServiceInterface.getEmployeeById(id);
     }
+    @PostMapping
+    public EmployeeDto saveEmployee(@RequestBody EmployeeDto employee){
+        return employeeServiceInterface.saveEmployee(employee);
+    }
+
+    @PutMapping("/{id}")
+    public EmployeeDto updateEmployee(@RequestBody EmployeeDto employee,@PathVariable int id){
+        return employeeServiceInterface.updateEmployee(employee,id);
+    }
+
+    @PatchMapping("/{id}")
+    public EmployeeDto patchUpdateEmployee(@RequestBody EmployeeDto employee, @PathVariable int id){
+        return employeeServiceInterface.patchUpdateEmployee(employee,id);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteEmployee(@PathVariable int id){
+        return employeeServiceInterface.deleteEmployee(id);
+    }
+
 }
