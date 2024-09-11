@@ -1,5 +1,6 @@
 package com.ebi.employee.repo;
 
+
 import com.ebi.employee.model.entity.EmployeeEntity;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
@@ -8,17 +9,16 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-@Primary
-//@Qualifier("imp1")
+//@Primary
+//@Qualifier("imp2")
 @Repository
-public class EmployeeRepoImplementation implements EmployeeRepoInterface {
-
+public class EmployeeRepoImplementation1 implements EmployeeRepoInterface{
     @Override
     public List<EmployeeEntity> getAllEmployees(){
         List<EmployeeEntity> employees = new ArrayList<EmployeeEntity>();
 
         EmployeeEntity employeeEntity1= new EmployeeEntity(1,"Seif Eldin","Sultan","15000");
-        EmployeeEntity employeeEntity2=new EmployeeEntity(3,"mazen","Naser","16000");
+        EmployeeEntity employeeEntity2=new EmployeeEntity(3,"Ahmed","Khaled","16000");
         employees.add(employeeEntity1);
         employees.add(employeeEntity2);
         return employees;

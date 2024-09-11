@@ -2,15 +2,19 @@ package com.ebi.employee.service;
 
 import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.model.entity.EmployeeEntity;
+import com.ebi.employee.repo.EmployeeRepoImplementation;
 import com.ebi.employee.repo.EmployeeRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import com.ebi.employee.util.mapper.EmployeeMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
