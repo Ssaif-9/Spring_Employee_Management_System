@@ -1,19 +1,15 @@
 package com.ebi.employee.service;
 
 import com.ebi.employee.model.EmployeeDto;
-import com.ebi.employee.model.entity.EmployeeEntity;
-import com.ebi.employee.repo.EmployeeRepoImplementation;
+import com.ebi.employee.entity.EmployeeEntity;
+import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import com.ebi.employee.util.mapper.EmployeeMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +21,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
 
     @Override
     public List<EmployeeDto> getAllEmployees(){
-        List<EmployeeEntity> employeeEntityList =employeeRepoInterface.getAllEmployees();
+        List<EmployeeEntity> employeeEntityList =employeeRepoInterface.findAll();
 
         return employeeEntityList.stream().map(Employee->modelMapper
                 .map(Employee,EmployeeDto.class))
@@ -33,46 +29,64 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
     }
 
     @Override
-    public EmployeeDto getEmployeeById(int id){
-        EmployeeEntity employeeEntity = employeeRepoInterface.getEmployeeById(id);
+    public EmployeeDto getEmployeeById(long id){
+        /*
+        Optional<EmployeeEntity> employeeEntity = employeeRepoInterface.findById(id);
+        return employeeEntity.map(entity -> modelMapper.map(entity, EmployeeDto.class)).orElse(null);
+        * */
+        EmployeeEntity employeeEntity = employeeRepoInterface.findById(id).orElse(null);
         return modelMapper.map(employeeEntity,EmployeeDto.class);
     }
 
     @Override
-    public EmployeeDto saveEmployee(EmployeeDto employee){
+    public EmployeeSaveDto saveEmployee(EmployeeSaveDto employee){
         EmployeeEntity employeeEntity = modelMapper.map(employee,EmployeeEntity.class);
-        employeeRepoInterface.saveEmployee(employeeEntity);
-        return modelMapper.map(employeeEntity,EmployeeDto.class);
+        employeeRepoInterface.save(employeeEntity);
+        return modelMapper.map(employeeEntity,EmployeeSaveDto.class);
     }
 
     @Override
-    public EmployeeDto updateEmployee(EmployeeDto employee, int id){
+    public EmployeeSaveDto updateEmployee(EmployeeSaveDto employee){
         EmployeeEntity employeeEntity =  modelMapper.map(employee,EmployeeEntity.class);
-        employeeEntity.setId(id);
-        EmployeeEntity employeeEntity1 = employeeRepoInterface.updateEmployee(employeeEntity,id);
-        return modelMapper.map(employeeEntity1,EmployeeDto.class);
+        EmployeeEntity employeeEntity1 = employeeRepoInterface.save(employeeEntity);
+        return modelMapper.map(employeeEntity1,EmployeeSaveDto.class);
     }
 
     @Override
-    public EmployeeDto patchUpdateEmployee(EmployeeDto employee, int id){
-        EmployeeEntity employeeEntity =  modelMapper.map(employee,EmployeeEntity.class);
+    public EmployeeSaveDto patchUpdateEmployee(EmployeeSaveDto employee){
+        EmployeeEntity savedEmployeeEntity =null;
         if(employee!=null)
         {
-            if (employee.getFirstName()!=null)
+            Optional<EmployeeEntity> employeeEntityOptional = employeeRepoInterface.findById(employee.getId());
+        if(employeeEntityOptional.isPresent()){
+            if (employee.getName()!=null)
             {
-                employeeEntity.setFirstName(employee.getFirstName());
+                employeeEntityOptional.get().setName(employee.getName());
             }
             if (employee.getSalary()!=null)
             {
-                employeeEntity.setSalary(employee.getSalary());
+                employeeEntityOptional.get().setSalary(employee.getSalary());
             }
-            //TODO Save
+            if (employee.getAddress()!=null)
+            {
+                employeeEntityOptional.get().setAddress(employee.getAddress());
+            }
+            if (employee.getEmail()!=null)
+            {
+                employeeEntityOptional.get().setEmail(employee.getEmail());
+            }
+            if (employee.getPhone()!=null)
+            {
+                employeeEntityOptional.get().setPhone(employee.getPhone());
+            }
         }
-        return employee;
+            savedEmployeeEntity = employeeRepoInterface.save(employeeEntityOptional.get());
+        }
+        return modelMapper.map(savedEmployeeEntity,EmployeeSaveDto.class);
     }
 
     @Override
-    public boolean deleteEmployee(int id){
-        return employeeRepoInterface.deleteEmployee(id);
+    public void deleteEmployee(long id){
+         employeeRepoInterface.deleteById(id);
     }
 }

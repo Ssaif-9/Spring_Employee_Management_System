@@ -1,6 +1,7 @@
 package com.ebi.employee.controller;
 
 import com.ebi.employee.model.EmployeeDto;
+import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.service.EmployeeServiceImplementation;
 import com.ebi.employee.service.EmployeeServiceInterface;
 import com.ebi.employee.util.mapper.EmployeeMapper;
@@ -15,7 +16,6 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeServiceInterface employeeServiceInterface;
-    //private final EmployeeServiceImplementation employeeServiceImplementation;
 
 
     @GetMapping
@@ -24,27 +24,27 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public EmployeeDto getEmployeeById(@PathVariable int id){
+    public EmployeeDto getEmployeeById(@PathVariable long id){
         return employeeServiceInterface.getEmployeeById(id);
     }
     @PostMapping
-    public EmployeeDto saveEmployee(@RequestBody EmployeeDto employee){
+    public EmployeeSaveDto saveEmployee(@RequestBody EmployeeSaveDto employee){
         return employeeServiceInterface.saveEmployee(employee);
     }
 
-    @PutMapping("/{id}")
-    public EmployeeDto updateEmployee(@RequestBody EmployeeDto employee,@PathVariable int id){
-        return employeeServiceInterface.updateEmployee(employee,id);
+    @PutMapping
+    public EmployeeSaveDto updateEmployee(@RequestBody EmployeeSaveDto employee){
+        return employeeServiceInterface.updateEmployee(employee);
     }
 
-    @PatchMapping("/{id}")
-    public EmployeeDto patchUpdateEmployee(@RequestBody EmployeeDto employee, @PathVariable int id){
-        return employeeServiceInterface.patchUpdateEmployee(employee,id);
+    @PatchMapping
+    public EmployeeSaveDto patchUpdateEmployee(@RequestBody EmployeeSaveDto employee){
+        return employeeServiceInterface.patchUpdateEmployee(employee);
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteEmployee(@PathVariable int id){
-        return employeeServiceInterface.deleteEmployee(id);
+    public void deleteEmployee(@PathVariable long id){
+         employeeServiceInterface.deleteEmployee(id);
     }
 
 }

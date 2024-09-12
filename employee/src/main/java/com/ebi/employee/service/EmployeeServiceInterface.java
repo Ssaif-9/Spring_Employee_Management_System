@@ -1,6 +1,7 @@
 package com.ebi.employee.service;
 
 import com.ebi.employee.model.EmployeeDto;
+import com.ebi.employee.model.EmployeeSaveDto;
 
 import java.util.List;
 
@@ -8,13 +9,13 @@ public interface EmployeeServiceInterface {
 
     List<EmployeeDto> getAllEmployees();
 
-    EmployeeDto getEmployeeById(int id);
+    EmployeeDto getEmployeeById(long id);
 
-    EmployeeDto saveEmployee(EmployeeDto employee);
+    EmployeeSaveDto saveEmployee(EmployeeSaveDto employee);
 
-    EmployeeDto updateEmployee(EmployeeDto employee, int id);
+    EmployeeSaveDto updateEmployee(EmployeeSaveDto employee);
 
-    EmployeeDto patchUpdateEmployee(EmployeeDto employee, int id);
+    EmployeeSaveDto patchUpdateEmployee(EmployeeSaveDto employee);
 
-    boolean deleteEmployee(int id);
+    void deleteEmployee(long id);
 }
