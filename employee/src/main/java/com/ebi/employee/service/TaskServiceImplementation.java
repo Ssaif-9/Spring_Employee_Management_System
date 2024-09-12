@@ -2,7 +2,6 @@ package com.ebi.employee.service;
 
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.entity.TaskEntity;
-import com.ebi.employee.model.TaskDto;
 import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
 import com.ebi.employee.repo.TaskRepoInterface;
