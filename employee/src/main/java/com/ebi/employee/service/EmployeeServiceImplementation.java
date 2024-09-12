@@ -29,13 +29,9 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
     }
 
     @Override
-    public EmployeeDto getEmployeeById(long id){
-        /*
+    public EmployeeDto getEmployeeById(long id) {
         Optional<EmployeeEntity> employeeEntity = employeeRepoInterface.findById(id);
         return employeeEntity.map(entity -> modelMapper.map(entity, EmployeeDto.class)).orElse(null);
-        * */
-        EmployeeEntity employeeEntity = employeeRepoInterface.findById(id).orElse(null);
-        return modelMapper.map(employeeEntity,EmployeeDto.class);
     }
 
     @Override
@@ -89,4 +85,10 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
     public void deleteEmployee(long id){
          employeeRepoInterface.deleteById(id);
     }
+    @Override
+    public EmployeeDto getEmbloyeeByNameAndMail(String name, String mail) {
+        Optional<EmployeeEntity> employeeEntity = employeeRepoInterface.findByNameAndEmail(name,mail);
+        return employeeEntity.map(entity -> modelMapper.map(entity, EmployeeDto.class)).orElse(null);
+    }
+
 }

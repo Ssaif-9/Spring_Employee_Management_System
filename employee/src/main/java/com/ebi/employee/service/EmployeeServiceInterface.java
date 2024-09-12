@@ -17,5 +17,7 @@ public interface EmployeeServiceInterface {
 
     EmployeeSaveDto patchUpdateEmployee(EmployeeSaveDto employee);
 
+    EmployeeDto getEmbloyeeByNameAndMail(String name, String mail);
+
     void deleteEmployee(long id);
 }

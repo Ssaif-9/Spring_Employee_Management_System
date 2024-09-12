@@ -27,6 +27,12 @@ public class EmployeeController {
     public EmployeeDto getEmployeeById(@PathVariable long id){
         return employeeServiceInterface.getEmployeeById(id);
     }
+
+    @GetMapping("/ByNameAndMail")
+    public EmployeeDto getEmbloyeeByNameAndMail(@RequestParam String name ,@RequestParam String mail){
+            return employeeServiceInterface.getEmbloyeeByNameAndMail(name, mail);
+    }
+
     @PostMapping
     public EmployeeSaveDto saveEmployee(@RequestBody EmployeeSaveDto employee){
         return employeeServiceInterface.saveEmployee(employee);
