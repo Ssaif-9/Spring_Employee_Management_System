@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class EmployeeSaveDto {
-    private long id;
+    private Long id;
     private String name;
     private String salary;
     private String email;

@@ -1,6 +1,5 @@
 package com.ebi.employee.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,16 +11,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "employee")
-public class EmployeeEntity {
+@Table(name="task")
+public class TaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-    private String salary;
-    private String address;
-    private String phone;
-    private String email;
+    private String description;
+    private String date;
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name ="employee_id")
+    EmployeeEntity employeeEntity;
 }

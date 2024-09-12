@@ -9,7 +9,7 @@ public interface EmployeeServiceInterface {
 
     List<EmployeeDto> getAllEmployees();
 
-    EmployeeDto getEmployeeById(long id);
+    EmployeeDto getEmployeeById(Long id);
 
     EmployeeSaveDto saveEmployee(EmployeeSaveDto employee);
 

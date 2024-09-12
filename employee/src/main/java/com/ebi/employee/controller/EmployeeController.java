@@ -24,7 +24,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public EmployeeDto getEmployeeById(@PathVariable long id){
+    public EmployeeDto getEmployeeById(@PathVariable Long id){
         return employeeServiceInterface.getEmployeeById(id);
     }
 
@@ -49,7 +49,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable long id){
+    public void deleteEmployee(@PathVariable Long id){
          employeeServiceInterface.deleteEmployee(id);
     }
 
