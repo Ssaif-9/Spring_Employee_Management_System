@@ -1,5 +1,6 @@
 package com.ebi.employee.service;
 
+import com.ebi.employee.exception.CustomException;
 import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.model.EmployeeSaveDto;
@@ -31,7 +32,10 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
     @Override
     public EmployeeDto getEmployeeById(Long id) {
         Optional<EmployeeEntity> employeeEntity = employeeRepoInterface.findById(id);
-        return employeeEntity.map(entity -> modelMapper.map(entity, EmployeeDto.class)).orElse(null);
+        if(employeeEntity.isPresent())
+            return modelMapper.map(employeeEntity.get(),EmployeeDto.class);
+        else
+            throw new CustomException("888","Not Found","No element of data has this ID : "+id) ;
     }
 
     @Override
@@ -51,16 +55,15 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
     @Override
     public EmployeeDto patchUpdateEmployee(EmployeeSaveDto employee){
         EmployeeEntity savedEmployeeEntity =null;
-        if(employee!=null)
+
+        if(employee.getId()!=null)
         {
             Optional<EmployeeEntity> employeeEntityOptional = employeeRepoInterface.findById(employee.getId());
         if(employeeEntityOptional.isPresent()){
-            if (employee.getName()!=null)
-            {
+            if (employee.getName()!=null) {
                 employeeEntityOptional.get().setName(employee.getName());
             }
-            if (employee.getSalary()!=null)
-            {
+            if (employee.getSalary()!=null) {
                 employeeEntityOptional.get().setSalary(employee.getSalary());
             }
             if (employee.getAddress()!=null)
@@ -75,10 +78,11 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
             {
                 employeeEntityOptional.get().setPhone(employee.getPhone());
             }
-        }
-            savedEmployeeEntity = employeeRepoInterface.save(employeeEntityOptional.get());
-
-        }
+        }else
+            throw new CustomException("700","Miss Data","Can not find element for this id : "+employee.getId());
+        savedEmployeeEntity = employeeRepoInterface.save(employeeEntityOptional.get());
+        } else
+            throw new CustomException("777","miss Data","Can not find Resave data");
         return modelMapper.map(savedEmployeeEntity,EmployeeDto.class);
     }
 

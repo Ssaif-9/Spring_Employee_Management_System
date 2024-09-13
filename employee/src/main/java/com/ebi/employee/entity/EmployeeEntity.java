@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,4 +25,5 @@ public class EmployeeEntity {
     private String address;
     private String phone;
     private String email;
+
 }
