@@ -61,8 +61,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/ByNameAndMail")
-    public ResponseEntity<?> getEmployeeByNameAndMail(@RequestParam String name ,@RequestParam String mail){
-            EmployeeDto employeeDto=employeeServiceInterface.getEmployeeByNameAndMail(name, mail);
+    public ResponseEntity<?> getEmployeeByNameAndMail(@RequestParam String name ,@RequestParam String email){
+            EmployeeDto employeeDto=employeeServiceInterface.getEmployeeByNameAndMail(name, email);
             GeneralResponse<EmployeeDto> response =new GeneralResponse<>(GetCode,GetMessage,employeeDto);
             return new ResponseEntity<>(response,HttpStatus.OK);
     }
@@ -90,16 +90,11 @@ public class EmployeeController {
 
     @DeleteMapping("/{id}")
     public  ResponseEntity<?> deleteEmployee(@PathVariable Long id){
-        employeeServiceInterface.deleteEmployee(id);
-        GeneralResponse<String> response =new GeneralResponse<>(DeleteCode,DeleteMessage,"true");
+        EmployeeDto employeeDto= employeeServiceInterface.deleteEmployee(id);
+        GeneralResponse<EmployeeDto> response =new GeneralResponse<>(DeleteCode,DeleteMessage,employeeDto);
         return new ResponseEntity<>(response,HttpStatus.OK);
-
     }
 
-    @ExceptionHandler
-    ResponseEntity<?> notFoundHandler(CustomException customException){
-        ErrorException errorException =new ErrorException(customException.getExceptionDetail(),customException.getExceptionMessage(),customException.getExceptionMessage());
-        return new ResponseEntity<>(errorException,HttpStatus.OK);
-    }
+
 
 }

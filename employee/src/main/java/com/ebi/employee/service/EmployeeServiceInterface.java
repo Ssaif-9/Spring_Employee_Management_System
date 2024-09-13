@@ -19,5 +19,5 @@ public interface EmployeeServiceInterface {
 
     EmployeeDto getEmployeeByNameAndMail(String name, String mail);
 
-    void deleteEmployee(long id);
+    EmployeeDto deleteEmployee(Long id);
 }
