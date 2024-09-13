@@ -5,7 +5,9 @@ import com.ebi.employee.model.TaskSaveDto;
 
 public interface TaskServiceInterface {
 
-    TaskSaveDto addTask(TaskSaveDto task);
+    TaskDto addTask(TaskSaveDto task);
 
-    TaskSaveDto updateTask(TaskSaveDto task);
+    TaskDto updateTask(TaskSaveDto task);
+
+    TaskDto deleteTask(Long id);
 }

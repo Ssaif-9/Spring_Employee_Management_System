@@ -2,6 +2,7 @@ package com.ebi.employee.service;
 
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.entity.TaskEntity;
+import com.ebi.employee.model.TaskDto;
 import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
 import com.ebi.employee.repo.TaskRepoInterface;
@@ -20,16 +21,16 @@ public class TaskServiceImplementation implements TaskServiceInterface {
     private final EmployeeRepoInterface employeeRepoInterface;
 
 
-    public TaskSaveDto addTask(TaskSaveDto task) {
+    public TaskDto addTask(TaskSaveDto task) {
 
         TaskEntity taskEntity = modelMapper.map(task, TaskEntity.class);
         taskEntity.setEmployeeEntity(employeeRepoInterface.getById(task.getEmployeeId()));
         taskRepoInterface.save(taskEntity);
-        return modelMapper.map(taskEntity, TaskSaveDto.class);
+        return modelMapper.map(taskEntity, TaskDto.class);
     }
 
     @Override
-    public TaskSaveDto updateTask(TaskSaveDto task) {
+    public TaskDto updateTask(TaskSaveDto task) {
         TaskEntity saveTaskEntity = null;
         if (task != null) {
             Optional<TaskEntity> taskEntityOptional = taskRepoInterface.findById(task.getId());
@@ -52,6 +53,14 @@ public class TaskServiceImplementation implements TaskServiceInterface {
             }
             saveTaskEntity = taskRepoInterface.save(taskEntityOptional.get());
         }
-        return modelMapper.map(saveTaskEntity, TaskSaveDto.class);
+        return modelMapper.map(saveTaskEntity, TaskDto.class);
     }
+   @Override
+   public TaskDto deleteTask(Long id)
+   {
+       TaskEntity taskEntity = taskRepoInterface.findById(id).get();
+       taskRepoInterface.deleteById(id);
+       return modelMapper.map(taskEntity, TaskDto.class);
+   }
+
 }

@@ -11,13 +11,13 @@ public interface EmployeeServiceInterface {
 
     EmployeeDto getEmployeeById(Long id);
 
-    EmployeeSaveDto saveEmployee(EmployeeSaveDto employee);
+    EmployeeDto saveEmployee(EmployeeSaveDto employee);
 
-    EmployeeSaveDto updateEmployee(EmployeeSaveDto employee);
+    EmployeeDto updateEmployee(EmployeeSaveDto employee);
 
-    EmployeeSaveDto patchUpdateEmployee(EmployeeSaveDto employee);
+    EmployeeDto patchUpdateEmployee(EmployeeSaveDto employee);
 
-    EmployeeDto getEmbloyeeByNameAndMail(String name, String mail);
+    EmployeeDto getEmployeeByNameAndMail(String name, String mail);
 
     void deleteEmployee(long id);
 }

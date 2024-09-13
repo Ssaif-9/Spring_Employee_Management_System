@@ -35,21 +35,21 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
     }
 
     @Override
-    public EmployeeSaveDto saveEmployee(EmployeeSaveDto employee){
+    public EmployeeDto saveEmployee(EmployeeSaveDto employee){
         EmployeeEntity employeeEntity = modelMapper.map(employee,EmployeeEntity.class);
         employeeRepoInterface.save(employeeEntity);
-        return modelMapper.map(employeeEntity,EmployeeSaveDto.class);
+        return modelMapper.map(employeeEntity,EmployeeDto.class);
     }
 
     @Override
-    public EmployeeSaveDto updateEmployee(EmployeeSaveDto employee){
+    public EmployeeDto updateEmployee(EmployeeSaveDto employee){
         EmployeeEntity employeeEntity =  modelMapper.map(employee,EmployeeEntity.class);
         EmployeeEntity employeeEntity1 = employeeRepoInterface.save(employeeEntity);
-        return modelMapper.map(employeeEntity1,EmployeeSaveDto.class);
+        return modelMapper.map(employeeEntity1,EmployeeDto.class);
     }
 
     @Override
-    public EmployeeSaveDto patchUpdateEmployee(EmployeeSaveDto employee){
+    public EmployeeDto patchUpdateEmployee(EmployeeSaveDto employee){
         EmployeeEntity savedEmployeeEntity =null;
         if(employee!=null)
         {
@@ -79,15 +79,16 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
             savedEmployeeEntity = employeeRepoInterface.save(employeeEntityOptional.get());
 
         }
-        return modelMapper.map(savedEmployeeEntity,EmployeeSaveDto.class);
+        return modelMapper.map(savedEmployeeEntity,EmployeeDto.class);
     }
 
     @Override
     public void deleteEmployee(long id){
          employeeRepoInterface.deleteById(id);
     }
+
     @Override
-    public EmployeeDto getEmbloyeeByNameAndMail(String name, String email) {
+    public EmployeeDto getEmployeeByNameAndMail(String name, String email) {
         Optional<EmployeeEntity> employeeEntity = employeeRepoInterface.findByMyQuery(name,email);
         return employeeEntity.map(entity -> modelMapper.map(entity, EmployeeDto.class)).orElse(null);
     }

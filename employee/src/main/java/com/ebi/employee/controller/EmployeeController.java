@@ -29,22 +29,22 @@ public class EmployeeController {
     }
 
     @GetMapping("/ByNameAndMail")
-    public EmployeeDto getEmbloyeeByNameAndMail(@RequestParam String name ,@RequestParam String mail){
-            return employeeServiceInterface.getEmbloyeeByNameAndMail(name, mail);
+    public EmployeeDto getEmployeeByNameAndMail(@RequestParam String name ,@RequestParam String mail){
+            return employeeServiceInterface.getEmployeeByNameAndMail(name, mail);
     }
 
     @PostMapping
-    public EmployeeSaveDto saveEmployee(@RequestBody EmployeeSaveDto employee){
+    public EmployeeDto saveEmployee(@RequestBody EmployeeSaveDto employee){
         return employeeServiceInterface.saveEmployee(employee);
     }
 
     @PutMapping
-    public EmployeeSaveDto updateEmployee(@RequestBody EmployeeSaveDto employee){
+    public EmployeeDto updateEmployee(@RequestBody EmployeeSaveDto employee){
         return employeeServiceInterface.updateEmployee(employee);
     }
 
     @PatchMapping
-    public EmployeeSaveDto patchUpdateEmployee(@RequestBody EmployeeSaveDto employee){
+    public EmployeeDto patchUpdateEmployee(@RequestBody EmployeeSaveDto employee){
         return employeeServiceInterface.patchUpdateEmployee(employee);
     }
 

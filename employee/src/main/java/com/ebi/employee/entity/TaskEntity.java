@@ -22,5 +22,5 @@ public class TaskEntity {
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name ="employee_id")
-    EmployeeEntity employeeEntity;
+    private EmployeeEntity employeeEntity;
 }
