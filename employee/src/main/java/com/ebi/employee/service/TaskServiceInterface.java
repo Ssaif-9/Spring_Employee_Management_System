@@ -11,3 +11,4 @@ public interface TaskServiceInterface {
 
     TaskDto deleteTask(Long id);
 }
+
