@@ -2,10 +2,7 @@ package com.ebi.employee.service;
 
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.entity.TaskEntity;
-import com.ebi.employee.exception.EmployeeUpdateException;
-import com.ebi.employee.exception.TaskAddException;
-import com.ebi.employee.exception.TaskDeleteException;
-import com.ebi.employee.exception.TaskUpdateException;
+import com.ebi.employee.exception.CustomException;
 import com.ebi.employee.model.TaskDto;
 import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
@@ -28,7 +25,7 @@ public class TaskServiceImplementation implements TaskServiceInterface {
 
         TaskEntity taskEntity = modelMapper.map(task, TaskEntity.class);
         if (!taskEntity.getDate().matches("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$"))
-            throw new TaskAddException("011", "Date Form", "Please Enter Date Form dd/MM/yyyy");
+            throw new CustomException("011", "Date Form", "Please Enter Date Form dd/MM/yyyy");
         Optional <EmployeeEntity> employeeEntityOptional = employeeRepoInterface.findById(task.getEmployeeId());
         if (employeeEntityOptional.isPresent()) {
             taskEntity.setEmployeeEntity(employeeRepoInterface.getById(task.getEmployeeId()));
@@ -36,7 +33,7 @@ public class TaskServiceImplementation implements TaskServiceInterface {
             return modelMapper.map(taskEntity, TaskDto.class);
         }
         else
-            throw new TaskAddException("012", "Employee Not Found", "Please Enter Employee who do this task");
+            throw new CustomException("012", "Employee Not Found", "Please Enter Employee who do this task");
     }
 
     @Override
@@ -49,30 +46,30 @@ public class TaskServiceImplementation implements TaskServiceInterface {
                     if(!task.getName().equals(taskEntityOptional.get().getName()))
                         taskEntityOptional.get().setName(task.getName());
                     else
-                        throw new TaskUpdateException("023","Name Error","Must Enter New Name ");
+                        throw new CustomException("023","Name Error","Must Enter New Name ");
                 }
                 if (task.getDescription() != null) {
                     if(!task.getDescription().equals(taskEntityOptional.get().getDescription()))
                          taskEntityOptional.get().setDescription(task.getDescription());
-                    else throw new TaskUpdateException("024","Description Error","Must Enter New Description ");
+                    else throw new CustomException("024","Description Error","Must Enter New Description ");
                 }
                 if (task.getDate() != null) {
                     if(!task.getDate().equals(taskEntityOptional.get().getDate()) && taskEntityOptional.get().getDate().matches("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$"))
                         taskEntityOptional.get().setDate(task.getDate());
-                    else throw new TaskUpdateException("025","Date Error","Must Enter New data with  Form dd/MM/yyyy");
+                    else throw new CustomException("025","Date Error","Must Enter New date with  Form dd/MM/yyyy");
                 }
                 if (task.getEmployeeId() != null) {
                     Optional<EmployeeEntity> employeeEntityOptional = employeeRepoInterface.findById(task.getEmployeeId());
                     if(!task.getEmployeeId().equals(taskEntityOptional.get().getId())&&employeeEntityOptional.isPresent())
                         taskEntityOptional.get().setEmployeeEntity(employeeEntityOptional.get());
                     else
-                        throw new TaskUpdateException("026","Employee Not Found","Must Enter New Employee Id ");
+                        throw new CustomException("026","Employee Not Found","Must Enter New Employee Id ");
                 }
             }else
-                throw new TaskAddException("022","Miss Task","No Employee with id : "+task.getId());
+                throw new CustomException("022","Miss Task","No Employee with id : "+task.getId());
             saveTaskEntity = taskRepoInterface.save(taskEntityOptional.get());
         }else
-            throw new TaskAddException ("021","Not Found Task","miss this Task data");
+            throw new CustomException ("021","Not Found Task","miss this Task data");
         return modelMapper.map(saveTaskEntity, TaskDto.class);
     }
    @Override
@@ -84,6 +81,6 @@ public class TaskServiceImplementation implements TaskServiceInterface {
            return modelMapper.map(taskEntityOptional.get(), TaskDto.class);
        }
        else
-           throw new TaskDeleteException("031","Not Found Task","No Task with id : "+id +" to delete it ");
+           throw new CustomException("031","Not Found Task","No Task with id : "+id +" to delete it ");
    }
 }

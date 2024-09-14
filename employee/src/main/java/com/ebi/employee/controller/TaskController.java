@@ -1,10 +1,7 @@
 package com.ebi.employee.controller;
 
 import com.ebi.employee.entity.TaskEntity;
-import com.ebi.employee.exception.ErrorException;
-import com.ebi.employee.exception.TaskAddException;
-import com.ebi.employee.exception.TaskDeleteException;
-import com.ebi.employee.exception.TaskUpdateException;
+import com.ebi.employee.exception.*;
 import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.model.GeneralResponse;
 import com.ebi.employee.model.TaskDto;
@@ -68,22 +65,11 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @ExceptionHandler(value = TaskAddException.class)
-    ResponseEntity<?> addTaskExceptionHandler(TaskAddException taskAddException){
+    @ExceptionHandler(value = CustomException.class)
+    ResponseEntity<?> addTaskExceptionHandler(CustomException taskAddException){
         ErrorException errorException =new ErrorException(taskAddException.getExceptionCode(),taskAddException.getExceptionMessage(),taskAddException.getExceptionDetail());
         return new ResponseEntity<>(errorException, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = TaskDeleteException.class)
-    ResponseEntity<?> deleteTaskExceptionHandler(TaskDeleteException taskDeleteException){
-        ErrorException errorException =new ErrorException(taskDeleteException.getExceptionCode(),taskDeleteException.getExceptionMessage(),taskDeleteException.getExceptionDetail());
-        return new ResponseEntity<>(errorException, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(value = TaskUpdateException.class)
-    ResponseEntity<?> updateTaskExceptionHandler(TaskUpdateException taskUpdateException){
-        ErrorException errorException =new ErrorException(taskUpdateException.getExceptionCode(),taskUpdateException.getExceptionMessage(),taskUpdateException.getExceptionDetail());
-        return new ResponseEntity<>(errorException, HttpStatus.NOT_FOUND);
-    }
 
 }

@@ -12,11 +12,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/employee")
 @RequiredArgsConstructor
 public class EmployeeController {
@@ -45,7 +47,7 @@ public class EmployeeController {
 
 
 
-
+    @ResponseBody
     @GetMapping
     public ResponseEntity<?> getAllEmployees(){
         List<EmployeeDto> employeeDtoList = employeeServiceInterface.getAllEmployees();
@@ -53,6 +55,33 @@ public class EmployeeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/home")
+    public String homePage() {
+        return "index";
+    }
+
+    @GetMapping("/view")
+    public String getAllEmployeesWithView(Model model){
+        List<EmployeeDto> employeeDtoList = employeeServiceInterface.getAllEmployees();
+        GeneralResponse<List<EmployeeDto>> response =new GeneralResponse<>(GetCode,GetMessage,employeeDtoList);
+        model.addAttribute("response",response);
+        return "employee";
+    }
+
+    @GetMapping("/register")
+    public String getAddEmployee(Model model){
+        model.addAttribute("employee", new EmployeeSaveDto());
+        return "addEmployee";
+    }
+
+    @PostMapping("/register")
+    public String registerEmployee( EmployeeSaveDto employeeSaveDto, Model model){
+        EmployeeDto employeeDto=employeeServiceInterface.saveEmployee(employeeSaveDto);
+        model.addAttribute("employee", new EmployeeDto());
+        return "redirect:view";
+    }
+
+    @ResponseBody
     @GetMapping("/{id}")
     public ResponseEntity<?> getEmployeeById(@PathVariable Long id){
         EmployeeDto employeeDto = employeeServiceInterface.getEmployeeById(id);
@@ -60,6 +89,7 @@ public class EmployeeController {
         return new ResponseEntity<>(response,HttpStatus.FOUND);
     }
 
+    @ResponseBody
     @GetMapping("/ByNameAndMail")
     public ResponseEntity<?> getEmployeeByNameAndMail(@RequestParam String name ,@RequestParam String email){
             EmployeeDto employeeDto=employeeServiceInterface.getEmployeeByNameAndMail(name, email);
@@ -67,6 +97,7 @@ public class EmployeeController {
             return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
+    @ResponseBody
     @PostMapping
     public ResponseEntity<?> saveEmployee(@RequestBody EmployeeSaveDto employee){
         EmployeeDto employeeDto=employeeServiceInterface.saveEmployee(employee);
@@ -74,6 +105,7 @@ public class EmployeeController {
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
+    @ResponseBody
     @PutMapping
     public ResponseEntity<?> updateEmployee(@RequestBody EmployeeSaveDto employee){
         EmployeeDto employeeDto= employeeServiceInterface.updateEmployee(employee);
@@ -81,6 +113,7 @@ public class EmployeeController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
+    @ResponseBody
     @PatchMapping
     public ResponseEntity<?> patchUpdateEmployee(@RequestBody EmployeeSaveDto employee){
         EmployeeDto employeeDto= employeeServiceInterface.patchUpdateEmployee(employee);
@@ -88,6 +121,7 @@ public class EmployeeController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public  ResponseEntity<?> deleteEmployee(@PathVariable Long id){
         EmployeeDto employeeDto= employeeServiceInterface.deleteEmployee(id);
@@ -95,6 +129,11 @@ public class EmployeeController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
+    @ExceptionHandler(value = CustomException.class)
+    public String notFoundElement(CustomException customException,Model model){
+        model.addAttribute("error",customException);
+        return "error";
+    }
 
 
 }

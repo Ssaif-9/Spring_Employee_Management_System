@@ -20,7 +20,7 @@ public class TaskEntity {
     private String description;
     private String date;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name ="employee_id")
     private EmployeeEntity employeeEntity;
 }
