@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>diigo</title>
+      <title>EMS</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -47,32 +47,11 @@
                         <div class="full">
                            <div class="center-desk">
                               <div class="logo">
-                                 <a href="index.html"><img src="/images/logo.png" alt="#" /></a>
+                                 <a href="home"><img src="/images/icon.png" alt="#" /></a>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                        <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                           <span class="navbar-toggler-icon"></span>
-                           </button>
-                           <div class="collapse navbar-collapse" id="navbarsExample04">
-                              <ul class="navbar-nav mr-auto">
-                                 <li class="nav-item">
-                                    <a  th:href="@{/employee/register}"> Add Employee  </a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a th:href="@{/employee/view}"> List Employees</a>
-                                 </li>
-                              </ul>
-                           </div>
-                        </nav>
-                     </div>
-                  </div>
                </div>
             </div>
             <!-- end header inner -->
@@ -81,11 +60,10 @@
             <section class="banner_main">
                <div class="container-fluid">
                   <div class="row d_flex">
-                     <div class="col-md-6">
+                     <div class="col-md-5">
                         <div class="text-bg">
-                           <h1>Digital Marketing Landing Page 2019</h1>
-                           <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</p>
-                           <a href="#">Read More</a>
+                           <h1>Employees Management System</h1>
+                           <p>Our Employee Management System helps organizations efficiently manage employee data, track performance, and streamline HR processes. From onboarding to payroll, this system simplifies the entire employee lifecycle, ensuring compliance and improving productivity. Empower your team with tools that make managing your workforce easier and more effective.</p>
                         </div>
                      </div>
                      <div class="col-md-6">
@@ -97,28 +75,85 @@
                </div>
             </section>
          </div>
+         </div>
       </header>
       <!-- end banner -->
       <!-- business -->
-      <div class="business">
+      <div class="projects">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <span>Increase your client for</span>
-                     <h2>Better position of Business</h2>
-                     <p>It is a long established fact that a reader will be distracted by the readable content of a page </p>
+                     <span>List Employees</span>
+                     <h2>Where you can show all Employees </h2>
                   </div>
                </div>
             </div>
             <div class="row">
                <div class="col-md-10 offset-md-1">
                   <div class="row">
+                     <div class="col-md-6 offset-md-3">
+
+                     </div>
                      <div class="col-md-12">
-                        <div class="business_box ">
-                           <figure><img src="/images/business_img.jpg" alt="#"/></figure>
-                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believableThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</p>
-                           <a class="read_more" href="#">Read more</a>
+                        <div class="projects_box ">
+                           <a  class="read_more" th:href="@{/employee/list}"> List </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end business -->
+      <!-- business -->
+      <div class="projects">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <span>Add Employee</span>
+                     <h2>Where you can Add new Employee </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-10 offset-md-1">
+                  <div class="row">
+                     <div class="col-md-6 offset-md-3">
+
+                     </div>
+                     <div class="col-md-12">
+                        <div class="projects_box ">
+                           <a class="read_more"  th:href="@{/employee/add}"> Add </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end business -->
+      <!-- business -->
+      <div class="projects">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <span>Search Employee</span>
+                     <h2>Where you can search about employee </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-10 offset-md-1">
+                  <div class="row">
+                     <div class="col-md-6 offset-md-3">
+
+                     </div>
+                     <div class="col-md-12">
+                        <div class="projects_box ">
+                           <a  class="read_more" th:href="@{/employee/search}"> Search </a>
                         </div>
                      </div>
                   </div>
@@ -133,9 +168,8 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <span>Previous Projects</span>
-                     <h2>Better position of Business</h2>
-                     <p>It is a long established fact that a reader will be distracted by the readable content of a page </p>
+                     <span>Update Employee</span>
+                     <h2>Where you can Update employee </h2>
                   </div>
                </div>
             </div>
@@ -143,14 +177,10 @@
                <div class="col-md-10 offset-md-1">
                   <div class="row">
                      <div class="col-md-6 offset-md-3">
-                        <div class="projects_box ">
-                           <figure><img src="/images/projects_img.png" alt="#"/></figure>
-                        </div>
                      </div>
                      <div class="col-md-12">
                         <div class="projects_box ">
-                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believableThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</p>
-                           <a class="read_more" href="#">Read more</a>
+                           <a  class="read_more" th:href="@{/employee/update}"> Update </a>
                         </div>
                      </div>
                   </div>
@@ -158,6 +188,63 @@
             </div>
          </div>
       </div>
+      <!-- end projects -->
+      <!-- business -->
+      <div class="projects">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <span>Patch Employee</span>
+                     <h2>Where you can patch same Wrong data for Employee </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-10 offset-md-1">
+                  <div class="row">
+                     <div class="col-md-6 offset-md-3">
+
+                     </div>
+                     <div class="col-md-12">
+                        <div class="projects_box ">
+                           <a class="read_more"  th:href="@{/employee/patch}"> Patch </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end business -->
+      <!-- Projects -->
+      <div class="projects">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <span>Delete Employee</span>
+                     <h2>Where you can Delete employee </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-10 offset-md-1">
+                  <div class="row">
+                     <div class="col-md-6 offset-md-3">
+
+                     </div>
+                     <div class="col-md-12">
+                        <div class="projects_box ">
+                           <a  class="read_more" th:href="@{/employee/delete}"> Delete </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
       <!-- end projects -->
       <!-- Testimonial -->
       <div class="section">
@@ -173,79 +260,32 @@
                <div class="row">
                   <div class="col-md-3">
                      <div class="Testimonial_box">
-                        <i><img src="/images/plan1.png" alt="#"/></i>
+                        <i><img src="/images/cropped_image.png" alt="#"/></i>
                      </div>
                   </div>
                   <div class="col-md-9">
                      <div class="Testimonial_box">
-                        <h4>Donals</h4>
-                        <p>Tof Lorem Ipsum, you need to be There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a pass <br>
-                           age of Lorem Ipsum, you need to be 
+                        <h4>Dr.Ismail El-Dahshan</h4>
+                        <h3>CEO eXact digital solutions</h3>
+                        <p>
+                           Software DeveloperOur team has greatly benefited from using the Employee Management System. It has streamlined our HR processes, making it incredibly easy to manage employee data, track performance, and handle payroll. The user-friendly interface ensures that our employees can access what they need without any technical hurdles, while the powerful backend helps us stay on top of compliance and reporting requirements. What used to take hours of manual work is now completed in minutes!
                         </p>
+                        <h3></h3>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
-     
-      <!-- end Testimonial -->
-      <!-- contact -->
-      <div id="contact" class="contact">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Contact us</h2>
-                     <span>There are many variations of passages of Lorem Ipsum available, but the </span>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12 ">
-                  <form class="main_form ">
-                     <div class="row">
-                        <div class="col-md-12 ">
-                           <input class="form_contril" placeholder="Name " type="text" name="Name ">
-                        </div>
-                        <div class="col-md-12">
-                           <input class="form_contril" placeholder="Phone Number" type="text" name=" Phone Number">
-                        </div>
-                        <div class="col-md-12">
-                           <input class="form_contril" placeholder="Email" type="text" name="Email">
-                        </div>
-                        <div class="col-md-12">
-                           <textarea class="textarea" placeholder="Message" type="text" name="Message"></textarea>
-                        </div>
-                        <div class="col-sm-12">
-                           <button class="send_btn">Send</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end contact -->
+
       <!--  footer -->
       <footer>
-         <div class="footer">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-12 ">
-                     <div class="cont">
-                        <h3> <strong class="multi"> Free Multipurpose Responsive</strong><br>
-                           Landing Page 2019
-                        </h3>
-                     </div>
-                  </div>
                   <div class="col-md-12">
                      <ul class="social_icon">
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></i></a></li>
+                        <li><a href="https://github.com/Ssaif-9"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+                        <li><a href="https://x.com/SsEeIiFf99"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/seif-eldin-sultan-90b740233/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+
                      </ul>
                   </div>
                </div>
@@ -254,7 +294,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
-                        <p>Copyright 2019 All Right Reserved By <a href="/https://html.design/"> Free  html Templates</a></p>
+                        <p>Enjoy trip</p>
                      </div>
                   </div>
                </div>

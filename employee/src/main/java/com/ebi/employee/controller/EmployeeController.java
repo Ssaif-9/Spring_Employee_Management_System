@@ -1,13 +1,10 @@
 package com.ebi.employee.controller;
 
 import com.ebi.employee.exception.CustomException;
-import com.ebi.employee.exception.ErrorException;
 import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.model.GeneralResponse;
-import com.ebi.employee.service.EmployeeServiceImplementation;
 import com.ebi.employee.service.EmployeeServiceInterface;
-import com.ebi.employee.util.mapper.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -50,42 +47,16 @@ public class EmployeeController {
     @ResponseBody
     @GetMapping
     public ResponseEntity<?> getAllEmployees(){
-        List<EmployeeDto> employeeDtoList = employeeServiceInterface.getAllEmployees();
-        GeneralResponse<List<EmployeeDto>> response =new GeneralResponse<>(GetCode,GetMessage,employeeDtoList);
+        List<EmployeeSaveDto> employeeDtoList = employeeServiceInterface.getAllEmployees();
+        GeneralResponse<List<EmployeeSaveDto>> response =new GeneralResponse<>(GetCode,GetMessage,employeeDtoList);
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/home")
-    public String homePage() {
-        return "index";
-    }
-
-    @GetMapping("/view")
-    public String getAllEmployeesWithView(Model model){
-        List<EmployeeDto> employeeDtoList = employeeServiceInterface.getAllEmployees();
-        GeneralResponse<List<EmployeeDto>> response =new GeneralResponse<>(GetCode,GetMessage,employeeDtoList);
-        model.addAttribute("response",response);
-        return "employee";
-    }
-
-    @GetMapping("/register")
-    public String getAddEmployee(Model model){
-        model.addAttribute("employee", new EmployeeSaveDto());
-        return "addEmployee";
-    }
-
-    @PostMapping("/register")
-    public String registerEmployee( EmployeeSaveDto employeeSaveDto, Model model){
-        EmployeeDto employeeDto=employeeServiceInterface.saveEmployee(employeeSaveDto);
-        model.addAttribute("employee", new EmployeeDto());
-        return "redirect:view";
     }
 
     @ResponseBody
     @GetMapping("/{id}")
     public ResponseEntity<?> getEmployeeById(@PathVariable Long id){
-        EmployeeDto employeeDto = employeeServiceInterface.getEmployeeById(id);
-        GeneralResponse<EmployeeDto> response =new GeneralResponse<>(GetCode,GetMessage,employeeDto);
+        EmployeeSaveDto employeeDto = employeeServiceInterface.getEmployeeById(id);
+        GeneralResponse<EmployeeSaveDto> response =new GeneralResponse<>(GetCode,GetMessage,employeeDto);
         return new ResponseEntity<>(response,HttpStatus.FOUND);
     }
 

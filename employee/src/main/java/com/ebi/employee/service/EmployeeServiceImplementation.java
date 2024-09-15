@@ -21,19 +21,19 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
     private final ModelMapper modelMapper;
 
     @Override
-    public List<EmployeeDto> getAllEmployees(){
+    public List<EmployeeSaveDto> getAllEmployees(){
         List<EmployeeEntity> employeeEntityList =employeeRepoInterface.findAll();
 
         return employeeEntityList.stream().map(Employee->modelMapper
-                .map(Employee,EmployeeDto.class))
+                .map(Employee,EmployeeSaveDto.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public EmployeeDto getEmployeeById(Long id) {
+    public EmployeeSaveDto getEmployeeById(Long id) {
         Optional<EmployeeEntity> employeeEntity = employeeRepoInterface.findById(id);
         if(employeeEntity.isPresent())
-            return modelMapper.map(employeeEntity.get(),EmployeeDto.class);
+            return modelMapper.map(employeeEntity.get(),EmployeeSaveDto.class);
         else
             throw new CustomException("01","Not Found","No element of data has this ID : " + id) ;
     }
