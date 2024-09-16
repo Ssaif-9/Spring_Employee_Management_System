@@ -3,7 +3,11 @@ package com.ebi.employee.service;
 import com.ebi.employee.model.TaskDto;
 import com.ebi.employee.model.TaskSaveDto;
 
+import java.util.List;
+
 public interface TaskServiceInterface {
+
+    List<TaskSaveDto> getAllTask ();
 
     TaskDto addTask(TaskSaveDto task);
 

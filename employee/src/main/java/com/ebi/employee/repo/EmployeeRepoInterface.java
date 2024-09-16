@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface EmployeeRepoInterface extends JpaRepository<EmployeeEntity,Long> {
 
-    Optional<EmployeeEntity> findByNameAndEmail(String name ,String email);
+    Optional<EmployeeEntity> findByName(String name);
 
-    @Query (value = "from EmployeeEntity e where e.name = :name and e.email = :email")
-    Optional<EmployeeEntity> findByMyQuery(String name ,String email);
 }

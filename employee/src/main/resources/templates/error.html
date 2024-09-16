@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Error Page</title>
 </head>
 <body>
 <header>
@@ -25,6 +26,73 @@
         </div>
     </div>
 </header>
+<div class="col-md-6">
+    <div class="text-img">
+        <figure><img src="/images/error.png" alt="#"/></figure>
+    </div>
+<div>
     <p th:text="${error.getExceptionCode()}"></p>
+    <p th:text="${error.getExceptionMessage()}"></p>
+    <p th:text="${error.getExceptionDetail()}"></p>
+</div>
 </body>
 </html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body, html {
+        height: 100%;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f2f2f2;
+    }
+
+    header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .text-img {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-img figure img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .text-img p {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #333;
+        text-align: center;
+    }
+
+    .col-md-6 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    figure {
+        margin: 0;
+        padding: 0;
+    }
+
+    p {
+        color: #333;
+    }
+
+</style>

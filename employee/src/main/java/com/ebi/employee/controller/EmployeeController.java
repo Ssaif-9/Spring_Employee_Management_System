@@ -60,13 +60,13 @@ public class EmployeeController {
         return new ResponseEntity<>(response,HttpStatus.FOUND);
     }
 
-    @ResponseBody
-    @GetMapping("/ByNameAndMail")
-    public ResponseEntity<?> getEmployeeByNameAndMail(@RequestParam String name ,@RequestParam String email){
-            EmployeeDto employeeDto=employeeServiceInterface.getEmployeeByNameAndMail(name, email);
-            GeneralResponse<EmployeeDto> response =new GeneralResponse<>(GetCode,GetMessage,employeeDto);
-            return new ResponseEntity<>(response,HttpStatus.OK);
-    }
+//    @ResponseBody
+//    @GetMapping("/ByNameAndMail")
+//    public ResponseEntity<?> getEmployeeByNameAndMail(@RequestParam String name ){
+//        EmployeeSaveDto employeeDto=employeeServiceInterface.getEmployeeByName(name);
+//            GeneralResponse<EmployeeSaveDto> response =new GeneralResponse<>(GetCode,GetMessage,employeeDto);
+//            return new ResponseEntity<>(response,HttpStatus.OK);
+//    }
 
     @ResponseBody
     @PostMapping

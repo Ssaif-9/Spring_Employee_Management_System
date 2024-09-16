@@ -31,30 +31,31 @@
 
         <div class="form-group">
             <label for="id">id:</label>
-            <input type="text" th:field="*{id}" class="form-control" id="id" required>
+            <input type="text" th:field="*{id}" class="form-control" id="id" placeholder="Enter Employee Id" required>
         </div>
+
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" th:field="*{name}" th:value="${employee.name}" class="form-control"
-                   id="name" required>
+            <input type="text" th:field="*{name}"  class="form-control"
+                   id="name" placeholder="Enter new name" required>
         </div>
         <div class="form-group">
             <label
                    for="salary">Salary:</label>
-            <input type="number" th:field="*{salary}" th:value="${employee.salary}" class="form-control" id="salary" required>
+            <input type="number" th:field="*{salary}"  class="form-control" id="salary" placeholder="Enter new salary" required>
 
         </div>
         <div class="form-group">
             <label for="phone">Phone:</label>
-            <input type="text" th:field="*{phone}" th:value="${employee.phone} "class="form-control" id="phone" required>
+            <input type="text" th:field="*{phone}" class="form-control" id="phone" placeholder="Enter new phone" required>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" th:field="*{email}" th:value="${employee.email} " class="form-control" id="email" required>
+            <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Enter new email" required>
         </div>
         <div class="form-group">
             <label for="address">Address:</label>
-            <input th:field="*{address}" th:value="${employee.address}" class="form-control" id="address" required>
+            <input th:field="*{address}"  class="form-control" id="address" placeholder="Enter new address" required>
         </div>
         <button type="submit" class="btn btn-primary">Update Employee</button>
     </form>

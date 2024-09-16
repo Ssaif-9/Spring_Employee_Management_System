@@ -3,6 +3,7 @@ package com.ebi.employee.service;
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.entity.TaskEntity;
 import com.ebi.employee.exception.CustomException;
+import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.model.TaskDto;
 import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
@@ -10,7 +11,10 @@ import com.ebi.employee.repo.TaskRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +24,13 @@ public class TaskServiceImplementation implements TaskServiceInterface {
     private final ModelMapper modelMapper;
     private final EmployeeRepoInterface employeeRepoInterface;
 
+    public List<TaskSaveDto> getAllTask (){
+        List<TaskEntity> taskEntityList =taskRepoInterface.findAll();
+
+        return taskEntityList.stream().map(Task->modelMapper
+                        .map(Task,TaskSaveDto.class))
+                        .collect(Collectors.toList());
+    }
 
     public TaskDto addTask(TaskSaveDto task) {
 

@@ -2,8 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/addEmployee.css">
+    <title>Add Employee</title>
 
 </head>
 <body>
@@ -36,10 +35,7 @@
                             th:action="@{/employee/add}"
                             th:object="${employee}" method="post">
                          <div class="row">
-                             <div class="from-group cal-md-6">
-                                 <label for="id" class="col-from-label">ID</label><input
-                                     type="text" th:field="*{id}" class="form-control" id="id">
-                             </div>
+
                              <div class="from-group cal-md-6">
                                  <label for="name" class="col-from-label">Name</label><input
                                     type="text" th:field="*{name}" class="form-control" id="name">
@@ -62,7 +58,7 @@
                              </div>
                              <div class="from-group cal-md-8">
                                  <input type="submit" class="btn btn-primary"
-                                     value="add employee">
+                                     value="Add Employee">
                              </div>
                          </div>
                      </form>
