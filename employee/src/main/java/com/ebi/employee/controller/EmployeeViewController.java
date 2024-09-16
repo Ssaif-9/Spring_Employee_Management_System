@@ -103,8 +103,34 @@ public class EmployeeViewController {
 
     @PostMapping("/searchByName")
     public String searchByNameEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
-        EmployeeSaveDto employeeDto = employeeServiceInterface.getEmployeeByName(employeeSaveDtoArgu.getName());
-        model.addAttribute("employee", employeeDto);
+        List<EmployeeSaveDto> employeeSaveDtoList = employeeServiceInterface.getEmployeeByName(employeeSaveDtoArgu.getName());
+        model.addAttribute("employee", employeeSaveDtoList);
+        return "subListEmployee";
+    }
+
+    @GetMapping("/searchByEmail")
+    public String getSearchByEmailEmployee(Model model){
+        model.addAttribute("employee", new EmployeeSaveDto());
+        return "searchByEmailEmployee";
+    }
+
+    @PostMapping("/searchByEmail")
+    public String searchByEmailEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
+        List<EmployeeSaveDto> employeeSaveDto =employeeServiceInterface.getEmployeeByEmail(employeeSaveDtoArgu.getEmail());
+        model.addAttribute("employee", employeeSaveDto);
+        return "subListEmployee";
+    }
+
+    @GetMapping("/searchByPhone")
+    public String getSearchByPhoneEmployee(Model model){
+        model.addAttribute("employee", new EmployeeSaveDto());
+        return "searchByPhoneEmployee";
+    }
+
+    @PostMapping("/searchByPhone")
+    public String searchByPhoneEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
+        List<EmployeeSaveDto> employeeSaveDto =employeeServiceInterface.getEmployeeByPhone(employeeSaveDtoArgu.getPhone());
+        model.addAttribute("employee", employeeSaveDto);
         return "subListEmployee";
     }
 
@@ -133,7 +159,6 @@ public class EmployeeViewController {
         model.addAttribute("employee", new EmployeeSaveDto());
         return "redirect:list";
     }
-
 
 
 

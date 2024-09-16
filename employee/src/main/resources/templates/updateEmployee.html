@@ -60,6 +60,8 @@
         <button type="submit" class="btn btn-primary">Update Employee</button>
     </form>
 </div>
+<a  class="read_more" th:href="@{/employee/patch}"> Patch Employee </a>
+
 </body>
 </html>
 
@@ -120,5 +122,22 @@
 
     button:hover {
         background-color: #3e8e41;
+    }
+
+    .read_more {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px;
+        background-color: #dc3545; /* Green background */
+        color: white;              /* White text */
+        text-align: center;
+        text-decoration: none;      /* Remove underline */
+        font-size: 16px;
+        border-radius: 5px;         /* Rounded corners */
+        transition: background-color 0.3s ease; /* Smooth hover effect */
+    }
+
+    .read_more:hover {
+        background-color: #dc3545; /* Darker green on hover */
     }
 </style>

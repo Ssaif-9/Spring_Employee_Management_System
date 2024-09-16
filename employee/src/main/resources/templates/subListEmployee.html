@@ -40,7 +40,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr >
+  <tr th:each="employee:${employee}">
     <td th:text="${employee.getId()}"></td>
     <td th:text="${employee.getName()}"></td>
     <td th:text="${employee.getEmail()}"></td>
@@ -76,7 +76,8 @@
   }
 
   .table tbody tr {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #aaaaaa;
+    background-color:#fff3cd;
   }
 
   .table tbody tr:hover {

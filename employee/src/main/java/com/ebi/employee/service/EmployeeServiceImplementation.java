@@ -39,14 +39,37 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
     }
 
     @Override
-    public EmployeeSaveDto getEmployeeByName(String name) {
-
-        Optional<EmployeeEntity> employeeEntityList =employeeRepoInterface.findByName(name);
-        if(employeeEntityList.isPresent())
-            return modelMapper.map(employeeEntityList.get(),EmployeeSaveDto.class);
+    public List<EmployeeSaveDto> getEmployeeByName(String name) {
+       List<EmployeeEntity> employeeEntityList = employeeRepoInterface.findByName(name);
+       if(!employeeEntityList.isEmpty())
+           //return modelMapper.map(employeeEntityList,EmployeeSaveDto.class);
+            return employeeEntityList.stream()
+                    .map(Employee->modelMapper.map(Employee,EmployeeSaveDto.class))
+                    .collect(Collectors.toList());
         else
-            throw new CustomException("777","Not Found","No element of data has this ID : " ) ;
+            throw new CustomException("02","Not Found","No element of data has this Name : "+ name ) ;
+    }
 
+    @Override
+    public List<EmployeeSaveDto> getEmployeeByEmail(String email) {
+        List<EmployeeEntity> employeeEntityList = employeeRepoInterface.findByEmail(email);
+        if(!employeeEntityList.isEmpty())
+            return employeeEntityList.stream()
+                    .map(Employee->modelMapper.map(Employee,EmployeeSaveDto.class))
+                    .collect(Collectors.toList());
+        else
+            throw new CustomException("03","Not Found","No element of data has this Email : "+ email) ;
+    }
+
+    @Override
+    public List<EmployeeSaveDto> getEmployeeByPhone(String phone) {
+        List<EmployeeEntity>employeeEntityList=employeeRepoInterface.findByPhone(phone);
+        if(!employeeEntityList.isEmpty())
+            return employeeEntityList.stream().map(Employee->modelMapper
+                    .map(Employee,EmployeeSaveDto.class))
+                    .collect(Collectors.toList());
+        else
+            throw new CustomException("04","Not Found","No element of data has this Phone : "+ phone) ;
     }
 
     @Override

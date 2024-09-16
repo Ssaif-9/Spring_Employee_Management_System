@@ -17,7 +17,11 @@ public interface EmployeeServiceInterface {
 
     EmployeeDto patchUpdateEmployee(EmployeeSaveDto employee);
 
-    EmployeeSaveDto getEmployeeByName(String name);
+    List<EmployeeSaveDto> getEmployeeByName(String name);
+
+    List<EmployeeSaveDto> getEmployeeByEmail(String email) ;
+
+    List<EmployeeSaveDto> getEmployeeByPhone(String phone);
 
     EmployeeDto deleteEmployee(Long id);
 }
