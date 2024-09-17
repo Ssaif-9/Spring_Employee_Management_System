@@ -4,6 +4,7 @@ import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.model.EmployeeSaveDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeServiceInterface {
 
@@ -24,4 +25,6 @@ public interface EmployeeServiceInterface {
     List<EmployeeSaveDto> getEmployeeByPhone(String phone);
 
     EmployeeDto deleteEmployee(Long id);
+
+    EmployeeDto loginEmployee(String email, String phone);
 }

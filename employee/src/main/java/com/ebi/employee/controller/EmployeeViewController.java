@@ -41,11 +41,37 @@ public class EmployeeViewController {
     @Value("${Success.Update.Message}")
     private String UpdateMessage;
 
-
-
     @GetMapping("/home")
     public String homePage() {
         return "index";
+    }
+
+    @GetMapping("/login")
+    public String loginPage(Model model) {
+        model.addAttribute("employee", new EmployeeSaveDto());
+        return "Login";
+    }
+
+    @PostMapping("/login")
+    public String loginEmployee (EmployeeSaveDto employeeSaveDto ,Model model)
+    {
+       EmployeeDto employeeDto= employeeServiceInterface.loginEmployee(employeeSaveDto.getEmail(),employeeSaveDto.getPhone());
+        model.addAttribute("employee", employeeDto);
+        return "redirect:home";
+    }
+
+    @GetMapping("/register")
+    public String registerPage(Model model) {
+        model.addAttribute("employee", new EmployeeSaveDto());
+        return "Register";
+    }
+
+    @PostMapping("/register")
+    public String registerEmployee (EmployeeSaveDto employeeSaveDto ,Model model)
+    {
+        EmployeeDto employeeDto=employeeServiceInterface.saveEmployee(employeeSaveDto);
+        model.addAttribute("employee", new EmployeeDto());
+        return "redirect:login";
     }
 
     @GetMapping("/list")
@@ -63,7 +89,7 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/add")
-    public String registerEmployee( EmployeeSaveDto employeeSaveDto, Model model){
+    public String addEmployee( EmployeeSaveDto employeeSaveDto, Model model){
         EmployeeDto employeeDto=employeeServiceInterface.saveEmployee(employeeSaveDto);
         model.addAttribute("employee", new EmployeeDto());
         return "redirect:list";
