@@ -85,11 +85,19 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface{
 
     @Override
     public EmployeeDto updateEmployee(EmployeeSaveDto employee){
-        EmployeeEntity employeeEntity =  modelMapper.map(employee,EmployeeEntity.class);
-
-
-        EmployeeEntity employeeEntity1 = employeeRepoInterface.save(employeeEntity);
-        return modelMapper.map(employeeEntity1,EmployeeDto.class);
+        Optional<EmployeeEntity> employeeSaveDto = employeeRepoInterface.findById(employee.getId());
+        if(employeeSaveDto.isEmpty())
+            throw new CustomException("404","Not Found","No element of data has this ID to Update it .");
+        else
+        {
+            EmployeeEntity employeeEntity =  modelMapper.map(employee,EmployeeEntity.class);
+            if(employeeEntity.getPhone().length()!=11||!employeeEntity.getPhone().startsWith("01"))
+                throw new CustomException("047","Phone Error","Must Enter New Phone has 11 digit and start with 01");
+            if(!employeeEntity.getEmail().contains(".com")||!employeeEntity.getEmail().contains("@"))
+                throw new CustomException("046","Email Error","Must Enter New Email must include @ and .com");
+            EmployeeEntity employeeEntity1 = employeeRepoInterface.save(employeeEntity);
+            return modelMapper.map(employeeEntity1,EmployeeDto.class);
+        }
     }
 
     @Override
