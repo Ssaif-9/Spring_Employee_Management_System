@@ -2,11 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Search By Employee Name</title>
-        <!-- bootstrap css -->
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <!-- style css -->
-       <link rel="stylesheet" href="/css/style.css">
+    <title>Search By Employee Salary</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <header>
@@ -54,15 +53,15 @@
     </div>
 
 </header>
-<h3>Search By Employee Name </h3>
+<h3>Search By Employee Salary </h3>
 <div class="card">
     <div class="card-body">
         <div class="col-md-8">
-            <form th:action="@{/employee/searchByName}" th:object="${employee}" method="post">
+            <form th:action="@{/employee/searchBySalary}" th:object="${employee}" method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Employee Name</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter Employee Name">
+                        <label for="salary" class="col-form-label">Employee Name</label>
+                        <input type="text" th:field="*{salary}" class="form-control" id="salary" placeholder="Enter Employee salary">
                     </div>
                     <div class="form-group col-md-8">
                         <input type="submit" class="btn btn-danger mt-3" value="Search Employee">
@@ -73,11 +72,10 @@
         </div>
     </div>
 </div>
-<a  class="read_more" th:href="@{/employee/search}"> Search by ID </a>
+<a  class="read_more" th:href="@{/employee/searchByName}"> Search by Name </a>
 <a  class="read_more" th:href="@{/employee/searchByEmail}"> Search by Email </a>
+<a  class="read_more" th:href="@{/employee/search}"> Search by ID </a>
 <a  class="read_more" th:href="@{/employee/searchByPhone}"> Search by Phone </a>
-<a  class="read_more" th:href="@{/employee/searchBySalary}"> Search by Salary </a>
-
 </body>
 </html>
 <style>
@@ -154,6 +152,4 @@
     .read_more:hover {
         background-color: #0891f8; /* Darker green on hover */
     }
-
-
 </style>

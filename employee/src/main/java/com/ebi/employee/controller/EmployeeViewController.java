@@ -160,6 +160,19 @@ public class EmployeeViewController {
         return "subListEmployee";
     }
 
+    @GetMapping("/searchBySalary")
+    public String getSearchBySalaryEmployee(Model model){
+        model.addAttribute("employee",new EmployeeSaveDto());
+        return "searchBySalaryEmployee";
+    }
+
+    @PostMapping("/searchBySalary")
+    public String searchBySalaryEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
+        List<EmployeeSaveDto> employeeSaveDtoList = employeeServiceInterface.getEmployeeBySalary(employeeSaveDtoArgu.getSalary());
+        model.addAttribute("employee", employeeSaveDtoList);
+        return "subListEmployee";
+    }
+
     @GetMapping("/update")
     public String getUpdateEmployee (Model model){
         model.addAttribute("employee", new EmployeeSaveDto());
@@ -185,10 +198,6 @@ public class EmployeeViewController {
         model.addAttribute("employee", new EmployeeSaveDto());
         return "redirect:list";
     }
-
-
-
-
 
     @ExceptionHandler(value = CustomException.class)
     public String notFoundElement(CustomException customException,Model model){

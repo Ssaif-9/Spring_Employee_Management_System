@@ -24,6 +24,8 @@ public interface EmployeeServiceInterface {
 
     List<EmployeeSaveDto> getEmployeeByPhone(String phone);
 
+    List<EmployeeSaveDto> getEmployeeBySalary(String salary);
+
     EmployeeDto deleteEmployee(Long id);
 
     EmployeeDto loginEmployee(String email, String phone);
