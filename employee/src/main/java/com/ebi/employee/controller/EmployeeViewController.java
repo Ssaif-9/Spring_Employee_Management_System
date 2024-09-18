@@ -168,7 +168,7 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/searchBySalary")
-    public String searchEmployeeBySalary( EmployeeSaveDto employeeSaveDtoArgu,  String searchType,Model model) {
+    public String searchEmployeeBySalary( EmployeeSaveDto employeeSaveDtoArgu,String searchType,Model model) {
         List<EmployeeSaveDto> employeeSaveDtoList =new ArrayList<EmployeeSaveDto>();
         switch (searchType) {
             case "equal":
@@ -184,29 +184,6 @@ public class EmployeeViewController {
         model.addAttribute("employee", employeeSaveDtoList);
         return "subListEmployee"; // This view will display the result
     }
-
-//    @PostMapping("/searchBySalary")
-//    public String searchBySalaryEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
-//        List<EmployeeSaveDto> employeeSaveDtoList = employeeServiceInterface.getEmployeeBySalary(employeeSaveDtoArgu.getSalary());
-//        model.addAttribute("employee", employeeSaveDtoList);
-//        return "subListEmployee";
-//    }
-//
-//    @PostMapping("/searchBySalaryAndGreater")
-//    public String searchByGreaterSalaryEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
-//        List<EmployeeSaveDto> employeeSaveDtoList = employeeServiceInterface.getEmployeeByGraterSalary(employeeSaveDtoArgu.getSalary());
-//        model.addAttribute("employee", employeeSaveDtoList);
-//        return "subListEmployee";
-//    }
-//
-//    @PostMapping("/searchBySalaryAndLess")
-//    public String searchByLessSalaryEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
-//        List<EmployeeSaveDto> employeeSaveDtoList = employeeServiceInterface.getEmployeeByLessSalary(employeeSaveDtoArgu.getSalary());
-//        model.addAttribute("employee", employeeSaveDtoList);
-//        return "subListEmployee";
-//    }
-
-
 
     @GetMapping("/update")
     public String getUpdateEmployee (Model model){
