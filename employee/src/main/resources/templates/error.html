@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
     <title>Error Page</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
+
 <header>
-    <!-- header inner -->
-    <div  class="head_top">
+    <!-- Header section with logo -->
+    <div class="head_top">
         <div class="header">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                        <div class="full">
-                            <div class="center-desk">
-                                <div class="logo">
-                                    <a href="home"><img src="/images/icon.png" alt="#" /></a>
-                                </div>
-                            </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-12 logo_section">
+                        <div class="logo text-center">
+                            <a href="home"><img src="/images/icon.png" alt="Logo" class="img-fluid" /></a>
                         </div>
                     </div>
                 </div>
@@ -26,74 +23,43 @@
         </div>
     </div>
 </header>
-<div class="col-md-6">
-    <div class="text-img">
-        <figure><img src="/images/error.png" alt="#"/></figure>
+
+<!-- Error Page Content -->
+<div class="container error-page">
+    <!-- Error image -->
+    <div class="col-md-6 mx-auto">
+        <figure>
+            <img src="/images/error.png" alt="Error Image" class="img-fluid">
+        </figure>
     </div>
-<div>
-    <p th:text="${error.getExceptionCode()}"></p>
-    <p th:text="${error.getExceptionMessage()}"></p>
-    <p th:text="${error.getExceptionDetail()}"></p>
+
+    <!-- Error details -->
+    <div class="col-md-8 mx-auto error-details">
+        <p th:text="${error.getExceptionCode()}" class="alert alert-danger"></p>
+        <p th:text="${error.getExceptionMessage()}" class="alert alert-warning"></p>
+        <p th:text="${error.getExceptionDetail()}" class="alert alert-info"></p>
+    </div>
+
+    <!-- Back to last page button -->
+    <div class="col-md-12 text-center mt-4">
+        <button class="btn btn-primary" onclick="history.back()">Back to Last Page</button>
+    </div>
 </div>
-</div>
+
+<script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    .error-page {
+        text-align: center;
+        padding-top: 50px;
     }
-
-    body, html {
-        height: 100%;
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f2f2f2;
-    }
-
-    header {
-        position: absolute;
-        top: 0;
-        width: 100%;
-    }
-
-    .text-img {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .text-img figure img {
+    .error-page img {
         max-width: 100%;
         height: auto;
     }
-
-    .text-img p {
+    .error-details {
         margin-top: 20px;
-        font-size: 18px;
-        color: #333;
-        text-align: center;
     }
-
-    .col-md-6 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    figure {
-        margin: 0;
-        padding: 0;
-    }
-
-    p {
-        color: #333;
-    }
-
 </style>
