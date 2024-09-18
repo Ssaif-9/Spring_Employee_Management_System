@@ -20,6 +20,11 @@ public interface EmployeeRepoInterface extends JpaRepository<EmployeeEntity,Long
     Optional<EmployeeEntity> findByEmailAndPhone(String email, String phone);
 
     @Query(value = "select * from employee  where salary >?",nativeQuery = true)
-    List<EmployeeEntity> findSalaryByCondation(String salary);
+    List<EmployeeEntity> findGreaterSalaryByCondation(String salary);
+
+    @Query(value = "select * from employee  where salary <?",nativeQuery = true)
+    List<EmployeeEntity> findLessSalaryByCondation(String salary);
+
+    List<EmployeeEntity> findBySalary(String salary);
 
 }

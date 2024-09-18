@@ -61,6 +61,37 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
             throw new CustomException("03", "Not Found", "No element of data has this Email : " + email);
     }
 
+    public List<EmployeeSaveDto> getEmployeeBySalary(String salary){
+        List<EmployeeEntity> employeeEntityList =employeeRepoInterface.findBySalary(salary);
+        if(!employeeEntityList.isEmpty())
+            return employeeEntityList.stream().map(Employee->modelMapper
+                            .map(Employee, EmployeeSaveDto.class))
+                    .collect(Collectors.toList());
+        else
+            throw new CustomException("05", "Not Found", "No element of data has this Salary : " + salary);
+    }
+
+    public List<EmployeeSaveDto> getEmployeeByGraterSalary(String salary){
+        List<EmployeeEntity> employeeEntityList = employeeRepoInterface.findGreaterSalaryByCondation(salary);
+        if(!employeeEntityList.isEmpty())
+            return employeeEntityList.stream().map(Employee->modelMapper
+                    .map(Employee,EmployeeSaveDto.class))
+                    .collect(Collectors.toList());
+        else
+             throw new CustomException("05", "Not Found", "No Employee take : " + salary+" or More ");
+    }
+
+    public List<EmployeeSaveDto> getEmployeeByLessSalary(String salary){
+        List<EmployeeEntity> employeeEntityList = employeeRepoInterface.findLessSalaryByCondation(salary);
+        if(!employeeEntityList.isEmpty())
+            return employeeEntityList.stream().map(Employee->modelMapper
+                            .map(Employee,EmployeeSaveDto.class))
+                            .collect(Collectors.toList());
+        else
+            throw new CustomException("05", "Not Found", "No Employee take : " + salary+" or Less ");
+
+    }
+
     @Override
     public List<EmployeeSaveDto> getEmployeeByPhone(String phone) {
         List<EmployeeEntity> employeeEntityList = employeeRepoInterface.findByPhone(phone);
@@ -72,14 +103,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
             throw new CustomException("04", "Not Found", "No element of data has this Phone : " + phone);
     }
 
-   public List<EmployeeSaveDto> getEmployeeBySalary(String salary){
-        List<EmployeeEntity> employeeEntityList =employeeRepoInterface.findSalaryByCondation(salary);
-        if(!employeeEntityList.isEmpty())
-            return employeeEntityList.stream().map(Employee->modelMapper
-                    .map(Employee, EmployeeSaveDto.class))
-                    .collect(Collectors.toList());
-        else throw new CustomException("05", "Not Found", "No element of data has this Salary : " + salary);
-    }
+
 
     @Override
     public EmployeeDto saveEmployee(EmployeeSaveDto employee) {

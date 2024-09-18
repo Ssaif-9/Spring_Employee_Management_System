@@ -26,6 +26,10 @@ public interface EmployeeServiceInterface {
 
     List<EmployeeSaveDto> getEmployeeBySalary(String salary);
 
+    List<EmployeeSaveDto> getEmployeeByGraterSalary(String salary);
+
+    List<EmployeeSaveDto> getEmployeeByLessSalary(String salary);
+
     EmployeeDto deleteEmployee(Long id);
 
     EmployeeDto loginEmployee(String email, String phone);

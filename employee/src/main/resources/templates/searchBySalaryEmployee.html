@@ -59,6 +59,14 @@
                     <label for="salary">Employee Salary</label>
                     <input type="text" th:field="*{salary}" class="form-control" id="salary" placeholder="Enter Employee Salary">
                 </div>
+                <div class="form-group">
+                    <label for="searchType">Search Type</label>
+                    <select class="form-control" name="searchType" id="searchType">
+                        <option value="equal">Equal to</option>
+                        <option value="greater">Greater than</option>
+                        <option value="less">Less than</option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Search Employee</button>
             </form>
         </div>
