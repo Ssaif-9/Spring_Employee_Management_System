@@ -42,19 +42,39 @@ public class TaskViewController {
     }
 
 
+    @GetMapping("/add")
+    public String getAddTask(Model model){
+            model.addAttribute("task", new TaskSaveDto());
+            return "addTask";
+    }
 
     @PostMapping("/add")
-    public String getAddTask(TaskSaveDto taskSaveDto ,Model model){
+    public String AddTask(TaskSaveDto taskSaveDto ,Model model){
         Optional<EmployeeEntity> employeeSaveDto =employeeRepoInterface.findById(taskSaveDto.getEmployeeId());
        if(employeeSaveDto.isPresent()){
             taskServiceInterface.addTask(taskSaveDto);
             model.addAttribute("task",taskSaveDto);
-            return "addTask";
+            return "redirect:/employee/login";
         }
         else
             throw new CustomException("001","not Exist Employee","Can not find employee who make this task ");
-
     }
+
+    @GetMapping("/delete")
+    public String getDeleteTask(Model model){
+        model.addAttribute("task", new TaskSaveDto());
+        return "deleteTask";
+    }
+
+    @PostMapping("/delete")
+    public String DeleteTask(TaskSaveDto taskSaveDto ,Model model){
+            taskServiceInterface.deleteTask(taskSaveDto.getId());
+            model.addAttribute("task",taskSaveDto.getId());
+            return "redirect:/employee/login";
+    }
+
+
+
 
 
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Task</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Custom style css -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <!-- Header section -->
+    <div class="head_top">
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo section -->
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 logo_section">
+                        <div class="logo">
+                            <a href="home"><img src="/images/icon.png" alt="Logo" class="img-fluid" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Delete Employee Form -->
+<div class="container my-5">
+    <h3>Delete Task</h3>
+    <div class="card">
+        <div class="card-body">
+            <form th:action="@{/task/delete}" th:object="${task}" method="post">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="id" class="col-form-label">Task ID</label>
+                        <input type="text" th:field="*{id}" class="form-control" id="id" placeholder="Enter Task ID">
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="form-group col-md-12">
+                        <input type="submit" class="btn btn-danger mt-3" value="Delete Task">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<style>
+    .nav-link {
+        color: #000000 !important;
+    }
+</style>

@@ -44,7 +44,7 @@ public class EmployeeViewController {
     @Value("${Success.Update.Message}")
     private String UpdateMessage;
 
-    @GetMapping("/home")
+    @GetMapping("/adminHome")
     public String homePage() {
         return "adminPage";
     }
@@ -59,8 +59,8 @@ public class EmployeeViewController {
     public String loginEmployee (EmployeeSaveDto employeeSaveDtoArg ,Model model) {
         String employeeRole= employeeServiceInterface.loginEmployee(employeeSaveDtoArg.getEmail(),employeeSaveDtoArg.getPhone());
         if (employeeRole.equals("admin")) {
-            //model.addAttribute("employee", employeeRole);
-            return "redirect:home";
+            model.addAttribute("employee", employeeRole); //can remove
+            return "redirect:adminHome";
         }
         else {
             List<EmployeeSaveDto> employeeSaveDto = employeeServiceInterface.getEmployeeByEmail(employeeSaveDtoArg.getEmail());
