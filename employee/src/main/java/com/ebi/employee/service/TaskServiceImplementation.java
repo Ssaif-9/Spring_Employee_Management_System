@@ -95,23 +95,28 @@ public class TaskServiceImplementation implements TaskServiceInterface {
         return modelMapper.map(saveTaskEntity, TaskDto.class);
     }
    @Override
-   public TaskDto deleteTask(@ModelAttribute("employeeEmail") String email,Long id)
-   {
+   public TaskDto deleteTask(@ModelAttribute("employeeEmail") String email, Long id) {
        Optional<TaskEntity> taskEntityOptional = taskRepoInterface.findById(id);
-       if (taskEntityOptional.isPresent()) {
-          TaskSaveDto taskSaveDto= modelMapper.map(taskEntityOptional.get(), TaskSaveDto.class);
-           Optional<EmployeeEntity> employeeSaveDto = employeeRepoInterface.findById(taskSaveDto.getEmployeeId());
-           EmployeeSaveDto employeeSaveDto1= modelMapper.map(employeeSaveDto.get(), EmployeeSaveDto.class);
-           if(employeeSaveDto1.getEmail().equals(email))
-           {
-               taskRepoInterface.deleteById(id);
-               return modelMapper.map(taskEntityOptional.get(), TaskDto.class);
-           }
-           else
-               throw new CustomException("044","Not Allow ","must delete only your tasks");
 
+       if (taskEntityOptional.isPresent()) {
+           TaskSaveDto taskSaveDto = modelMapper.map(taskEntityOptional.get(), TaskSaveDto.class);
+           Optional<EmployeeEntity> employeeSaveDto = employeeRepoInterface.findById(taskSaveDto.getEmployeeId());
+
+           if (employeeSaveDto.isPresent()) {
+               EmployeeSaveDto employeeSaveDto1 = modelMapper.map(employeeSaveDto.get(), EmployeeSaveDto.class);
+
+               if (employeeSaveDto1.getEmail().trim().equalsIgnoreCase(email.trim())) {
+                   taskRepoInterface.deleteById(id);
+                   return modelMapper.map(taskEntityOptional.get(), TaskDto.class);
+               } else {
+                   throw new CustomException("044", "Not Allowed", "Must delete only your tasks");
+               }
+           } else {
+               throw new CustomException("031", "Not Found Employee",    "No Employee found for this task");
+           }
+       } else {
+           throw new CustomException("031", "Not Found Task", "No Task with id : " + id + " to delete it");
        }
-       else
-           throw new CustomException("031","Not Found Task","No Task with id : "+id +" to delete it ");
    }
+
 }

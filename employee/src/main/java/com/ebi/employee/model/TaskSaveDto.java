@@ -15,4 +15,8 @@ public class TaskSaveDto {
     private String description;
     private String date;
     private Long employeeId;
+
+    public TaskSaveDto(Long employeeId) {
+        this.employeeId = employeeId;
+    }
 }

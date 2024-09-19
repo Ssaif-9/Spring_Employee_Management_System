@@ -9,9 +9,11 @@ import com.ebi.employee.repo.EmployeeRepoInterface;
 import com.ebi.employee.service.TaskServiceInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +21,13 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/task")
+@SessionAttributes("employeeEmail")
 @RequiredArgsConstructor
 public class TaskViewController {
 
     private final TaskServiceInterface taskServiceInterface;
     private final EmployeeRepoInterface employeeRepoInterface;
+    private final ModelMapper modelMapper;
 
     @Value("${Success.Get.code}")
     private String GetCode;
@@ -41,9 +45,20 @@ public class TaskViewController {
 
 
     @GetMapping("/add")
-    public String getAddTask(Model model){
-            model.addAttribute("task", new TaskSaveDto());
-            return "addTask";
+    public String getAddTask(@ModelAttribute("employeeEmail") String email, Model model){
+       List<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
+       if(!employeeEntity.isEmpty()){
+           EmployeeEntity employeeEntity1 = employeeEntity.get(0);
+         EmployeeSaveDto employeeSaveDto=  modelMapper.map(employeeEntity1,EmployeeSaveDto.class);
+           System.out.println("email "+email);
+           System.out.println("employeeSaveDto "+employeeSaveDto.getId());
+
+           model.addAttribute("task", new TaskSaveDto(employeeSaveDto.getId()));
+           return "addTask";
+       }
+       else
+           throw new CustomException("000","not found","No Employee Found");
+
     }
 
     @PostMapping("/add")
