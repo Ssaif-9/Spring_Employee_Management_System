@@ -3,6 +3,7 @@ package com.ebi.employee.service;
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.entity.TaskEntity;
 import com.ebi.employee.exception.CustomException;
+import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.model.TaskDto;
 import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
@@ -10,14 +11,19 @@ import com.ebi.employee.repo.TaskRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@SessionAttributes("employeeEmail")
 @RequiredArgsConstructor
 public class TaskServiceImplementation implements TaskServiceInterface {
+
+
 
     private final TaskRepoInterface taskRepoInterface;
     private final ModelMapper modelMapper;
@@ -89,12 +95,21 @@ public class TaskServiceImplementation implements TaskServiceInterface {
         return modelMapper.map(saveTaskEntity, TaskDto.class);
     }
    @Override
-   public TaskDto deleteTask(Long id)
+   public TaskDto deleteTask(@ModelAttribute("employeeEmail") String email,Long id)
    {
        Optional<TaskEntity> taskEntityOptional = taskRepoInterface.findById(id);
        if (taskEntityOptional.isPresent()) {
-           taskRepoInterface.deleteById(id);
-           return modelMapper.map(taskEntityOptional.get(), TaskDto.class);
+          TaskSaveDto taskSaveDto= modelMapper.map(taskEntityOptional.get(), TaskSaveDto.class);
+           Optional<EmployeeEntity> employeeSaveDto = employeeRepoInterface.findById(taskSaveDto.getEmployeeId());
+           EmployeeSaveDto employeeSaveDto1= modelMapper.map(employeeSaveDto.get(), EmployeeSaveDto.class);
+           if(employeeSaveDto1.getEmail().equals(email))
+           {
+               taskRepoInterface.deleteById(id);
+               return modelMapper.map(taskEntityOptional.get(), TaskDto.class);
+           }
+           else
+               throw new CustomException("044","Not Allow ","must delete only your tasks");
+
        }
        else
            throw new CustomException("031","Not Found Task","No Task with id : "+id +" to delete it ");

@@ -12,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +52,7 @@ public class TaskViewController {
        if(employeeSaveDto.isPresent()){
             taskServiceInterface.addTask(taskSaveDto);
             model.addAttribute("task",taskSaveDto);
-            return "redirect:/employee/login";
+            return "redirect:/employee/userHome";
         }
         else
             throw new CustomException("001","not Exist Employee","Can not find employee who make this task ");
@@ -67,16 +65,15 @@ public class TaskViewController {
     }
 
     @PostMapping("/delete")
-    public String DeleteTask(TaskSaveDto taskSaveDto ,Model model){
-            taskServiceInterface.deleteTask(taskSaveDto.getId());
+    public String DeleteTask(@ModelAttribute("employeeEmail") String email,TaskSaveDto taskSaveDto , Model model){
+            taskServiceInterface.deleteTask(email,taskSaveDto.getId());
             model.addAttribute("task",taskSaveDto.getId());
-            return "redirect:/employee/login";
+            return "redirect:/employee/userHome";
     }
 
-
-
-
-
-
-
+    @ExceptionHandler(value = CustomException.class)
+    public String notFoundElement(CustomException customException,Model model){
+        model.addAttribute("error",customException);
+        return "error";
+    }
 }

@@ -1,10 +1,7 @@
 package com.ebi.employee.controller;
 
 import com.ebi.employee.exception.CustomException;
-import com.ebi.employee.model.EmployeeDto;
-import com.ebi.employee.model.EmployeeSaveDto;
-import com.ebi.employee.model.GeneralResponse;
-import com.ebi.employee.model.TaskSaveDto;
+import com.ebi.employee.model.*;
 import com.ebi.employee.service.EmployeeServiceInterface;
 import com.ebi.employee.service.TaskServiceInterface;
 import com.ebi.employee.util.mapper.EmployeeMapper;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 @Controller
+@SessionAttributes("employeeEmail")
 @RequestMapping("/employee")
 @RequiredArgsConstructor
 public class EmployeeViewController {
@@ -44,45 +42,19 @@ public class EmployeeViewController {
     @Value("${Success.Update.Message}")
     private String UpdateMessage;
 
+
     @GetMapping("/adminHome")
-    public String homePage() {
+    public String adminHomePage() {
         return "adminPage";
     }
 
-    @GetMapping("/login")
-    public String loginPage(Model model) {
-        model.addAttribute("employee", new EmployeeSaveDto());
-        return "Login";
-    }
-
-    @PostMapping("/login")
-    public String loginEmployee (EmployeeSaveDto employeeSaveDtoArg ,Model model) {
-        String employeeRole= employeeServiceInterface.loginEmployee(employeeSaveDtoArg.getEmail(),employeeSaveDtoArg.getPhone());
-        if (employeeRole.equals("admin")) {
-            model.addAttribute("employee", employeeRole); //can remove
-            return "redirect:adminHome";
-        }
-        else {
-            List<EmployeeSaveDto> employeeSaveDto = employeeServiceInterface.getEmployeeByEmail(employeeSaveDtoArg.getEmail());
-            List<TaskSaveDto> taskSaveDtoList =taskServiceInterface.getEmployeeTasks(employeeSaveDto.get(0).getId());
-            model.addAttribute("employee", employeeSaveDto);
-            model.addAttribute("task", taskSaveDtoList);
-            return "userPage";
-        }
-    }
-
-    @GetMapping("/register")
-    public String registerPage(Model model) {
-        model.addAttribute("employee", new EmployeeSaveDto());
-        return "Register";
-    }
-
-    @PostMapping("/register")
-    public String registerEmployee (EmployeeSaveDto employeeSaveDto ,Model model)
-    {
-        EmployeeDto employeeDto=employeeServiceInterface.saveEmployee(employeeSaveDto);
-        model.addAttribute("employee", new EmployeeDto());
-        return "redirect:login";
+    @GetMapping("/userHome")
+    public String userHomePage(@ModelAttribute("employeeEmail") String email,Model model) {
+        List<EmployeeSaveDto> employeeSaveDto = employeeServiceInterface.getEmployeeByEmail(email);
+        List<TaskSaveDto> taskSaveDtoList =taskServiceInterface.getEmployeeTasks(employeeSaveDto.get(0).getId());
+        model.addAttribute("employee", employeeSaveDto);
+        model.addAttribute("task", taskSaveDtoList);
+        return "userPage";
     }
 
     @GetMapping("/list")

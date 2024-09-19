@@ -58,12 +58,12 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
-        TaskDto taskDto = taskServiceInterface.deleteTask(id);
-        GeneralResponse<TaskDto> response =new GeneralResponse<>(DeleteCode,DeleteMessage,taskDto);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+//        TaskDto taskDto = taskServiceInterface.deleteTask(id);
+//        GeneralResponse<TaskDto> response =new GeneralResponse<>(DeleteCode,DeleteMessage,taskDto);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
     @ExceptionHandler(value = CustomException.class)
     ResponseEntity<?> addTaskExceptionHandler(CustomException taskAddException){

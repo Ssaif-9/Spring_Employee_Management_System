@@ -10,7 +10,7 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow-lg p-4" style="width: 400px;">
         <h2 class="text-center mb-4">Login</h2>
-        <form action="#" th:action="@{/employee/login}" th:object="${employee}" method="post">
+        <form action="#" th:action="@{/login}" th:object="${employee}" method="post">
             <div class="mb-3">
                 <label for="email" class="form-label">Username</label>
                 <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Enter your username" required>
@@ -23,7 +23,7 @@
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </div>
             <div class="text-center mt-3">
-                <a class="text-decoration-none" th:href="@{/employee/register}">Sign Up</a>
+                <a class="text-decoration-none" th:href="@{/register}">Sign Up</a>
             </div>
         </form>
     </div>
