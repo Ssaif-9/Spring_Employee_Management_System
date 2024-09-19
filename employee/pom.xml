@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ebi</groupId>
-    <artifactId>employee</artifactId>
+    <artifactId>EmployeeManagementSystem</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>employee</name>
     <description>employee</description>
