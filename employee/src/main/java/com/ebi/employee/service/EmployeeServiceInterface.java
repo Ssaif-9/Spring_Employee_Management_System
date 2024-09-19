@@ -32,5 +32,5 @@ public interface EmployeeServiceInterface {
 
     EmployeeDto deleteEmployee(Long id);
 
-    EmployeeDto loginEmployee(String email, String phone);
+    String loginEmployee(String email, String phone);
 }

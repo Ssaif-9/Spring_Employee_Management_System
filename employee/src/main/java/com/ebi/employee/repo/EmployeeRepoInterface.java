@@ -1,6 +1,7 @@
 package com.ebi.employee.repo;
 
 import com.ebi.employee.entity.EmployeeEntity;
+import com.ebi.employee.entity.TaskEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,7 @@ public interface EmployeeRepoInterface extends JpaRepository<EmployeeEntity,Long
     List<EmployeeEntity> findLessSalaryByCondation(String salary);
 
     List<EmployeeEntity> findBySalary(String salary);
+
+
 
 }

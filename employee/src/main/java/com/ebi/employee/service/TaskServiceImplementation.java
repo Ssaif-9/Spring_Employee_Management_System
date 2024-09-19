@@ -3,7 +3,6 @@ package com.ebi.employee.service;
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.entity.TaskEntity;
 import com.ebi.employee.exception.CustomException;
-import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.model.TaskDto;
 import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
@@ -31,9 +30,15 @@ public class TaskServiceImplementation implements TaskServiceInterface {
                         .map(Task,TaskSaveDto.class))
                         .collect(Collectors.toList());
     }
+    public List<TaskSaveDto> getEmployeeTasks(Long employeeId){
+        List<TaskEntity> taskEntityList =taskRepoInterface.findMyQuery(employeeId);
+            return taskEntityList.stream().map(Task->modelMapper
+                            .map(Task,TaskSaveDto.class))
+                            .collect(Collectors.toList());
+
+    }
 
     public TaskDto addTask(TaskSaveDto task) {
-
         TaskEntity taskEntity = modelMapper.map(task, TaskEntity.class);
         if (!taskEntity.getDate().matches("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$"))
             throw new CustomException("011", "Date Form", "Please Enter Date Form dd/MM/yyyy");

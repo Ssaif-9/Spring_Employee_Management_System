@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+    <!-- header inner -->
+    <div class="head_top">
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo section -->
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 logo_section">
+                        <div class="logo">
+                            <a href="home"><img src="/images/icon.png" alt="Logo" class="img-fluid" /></a>
+                        </div>
+                    </div>
+                    <!-- Navigation section -->
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <nav class="navigation navbar navbar-expand-md navbar-dark">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarsExample04">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/employee/login}">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<h1>Employee Details</h1>
+<table class="table table-striped table-bordered">
+    <thead class="bg-primary">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>Phone</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employee}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.name}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td th:text="${employee.phone}"></td>
+        <td th:text="${employee.address}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h1>Employee Tasks</h1>
+<table class="table table-striped table-responsive-md">
+    <thead>
+    <tr>
+        <th>Task ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Date</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task:${task}">
+        <td th:text="${task.id}"></td>
+        <td th:text="${task.name}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.date}"></td>
+    </tr>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-auto">
+    <a class="btn btn-primary btn-shade-4 mb-2" th:href="@{/task/add}">Add New Task</a>
+    </div>
+    <div class="col-auto">
+    <a class="btn btn-primary btn-shade-4 mb-2 ms-2" th:href="@{/task/delete}">Delete Task</a>
+    </div>
+</div>
+
+</body>
+</html>
+<style>
+    .nav-link {
+        color: #000000 !important;
+    }
+</style>

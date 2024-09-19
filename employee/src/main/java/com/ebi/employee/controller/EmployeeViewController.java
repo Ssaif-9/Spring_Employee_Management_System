@@ -4,11 +4,12 @@ import com.ebi.employee.exception.CustomException;
 import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.model.GeneralResponse;
+import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.service.EmployeeServiceInterface;
+import com.ebi.employee.service.TaskServiceInterface;
+import com.ebi.employee.util.mapper.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import java.util.List;
 public class EmployeeViewController {
 
     private final EmployeeServiceInterface employeeServiceInterface;
+    private final TaskServiceInterface taskServiceInterface;
 
     @Value("${Success.Add.code}")
     private String AddCode;
@@ -44,7 +46,7 @@ public class EmployeeViewController {
 
     @GetMapping("/home")
     public String homePage() {
-        return "index";
+        return "adminPage";
     }
 
     @GetMapping("/login")
@@ -54,11 +56,19 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/login")
-    public String loginEmployee (EmployeeSaveDto employeeSaveDto ,Model model)
-    {
-       EmployeeDto employeeDto= employeeServiceInterface.loginEmployee(employeeSaveDto.getEmail(),employeeSaveDto.getPhone());
-        model.addAttribute("employee", employeeDto);
-        return "redirect:home";
+    public String loginEmployee (EmployeeSaveDto employeeSaveDtoArg ,Model model) {
+        String employeeRole= employeeServiceInterface.loginEmployee(employeeSaveDtoArg.getEmail(),employeeSaveDtoArg.getPhone());
+        if (employeeRole.equals("admin")) {
+            //model.addAttribute("employee", employeeRole);
+            return "redirect:home";
+        }
+        else {
+            List<EmployeeSaveDto> employeeSaveDto = employeeServiceInterface.getEmployeeByEmail(employeeSaveDtoArg.getEmail());
+            List<TaskSaveDto> taskSaveDtoList =taskServiceInterface.getEmployeeTasks(employeeSaveDto.get(0).getId());
+            model.addAttribute("employee", employeeSaveDto);
+            model.addAttribute("task", taskSaveDtoList);
+            return "userPage";
+        }
     }
 
     @GetMapping("/register")

@@ -9,6 +9,8 @@ public interface TaskServiceInterface {
 
     List<TaskSaveDto> getAllTask ();
 
+    List<TaskSaveDto> getEmployeeTasks(Long employeeId);
+
     TaskDto addTask(TaskSaveDto task);
 
     TaskDto updateTask(TaskSaveDto task);
