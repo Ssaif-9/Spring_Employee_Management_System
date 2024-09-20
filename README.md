@@ -44,24 +44,24 @@ After clone , change application.properties file and run program, open browser a
 
 first you must click to sign up and add new User with email admin@admin.com and password 01000000000.
 
-![Alt text](image/Registration.png).
+![Alt text](image/Registration.png)
 
 then you can login as a admin to add more employee.
 
-![Alt text](image/AdminLogin.png).
+![Alt text](image/AdminLogin.png)
 
 now you can take control as Admin and can list , add , update , search and delete employee.
 
-![Alt text](image/AdminPage2.png).
+![Alt text](image/AdminPage2.png.png)
 
 After add new employee you can login with this email and password to add new tasks.
 
-![Alt text](image/UserLogin.png).
+![Alt text](image/UserLogin.png)
 
 ##### note !! your password is a phone number 
 now you can take control as Admin and can add , delete and update Tasks.
 
-![Alt text](image/UserPage.png).
+![Alt text](image/UserPage.png)
 
 ### please act as admin and user 
 ## future work 
