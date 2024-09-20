@@ -2,6 +2,7 @@ package com.ebi.employee.service;
 
 import com.ebi.employee.model.TaskDto;
 import com.ebi.employee.model.TaskSaveDto;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface TaskServiceInterface {
 
     TaskDto addTask(TaskSaveDto task);
 
-    TaskDto updateTask(TaskSaveDto task);
+    TaskSaveDto updateTask(TaskSaveDto task);
 
     TaskDto deleteTask(String email,Long id);
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Task</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom style css -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <div class="head_top">
+    <div class="header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <!-- Logo section -->
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 logo_section">
+            <div class="logo">
+              <a href="/employee/userHome"><img src="/images/icon.png" alt="Logo" class="img-fluid" /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container my-5">
+  <h1 class="mb-4">Patch Employee</h1>
+  <form th:action="@{/task/update}" th:object="${task}" method="POST">
+
+    <div class="form-group">
+      <label for="employeeId">Employee id:</label>
+      <input type="text" th:field="*{employeeId}" class="form-control" id="employeeId" placeholder="Employee ID" readonly="true">
+    </div>
+    <div class="form-group">
+      <label for="id">Task id:</label>
+      <input type="text" th:field="*{id}" class="form-control" id="id" placeholder="Task ID" >
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter new name">
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" th:field="*{description}" class="form-control" id="description" placeholder="Enter new Description">
+    </div>
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="text" th:field="*{date}" class="form-control" id="date" placeholder="Enter new Date">
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Update Task</button>
+  </form>
+</div>
+</body>
+</html>
+<style>
+  .nav-link {
+    color: #000000 !important;
+  }
+</style>

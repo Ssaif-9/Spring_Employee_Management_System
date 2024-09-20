@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -59,45 +60,41 @@ public class TaskServiceImplementation implements TaskServiceInterface {
     }
 
     @Override
-    public TaskDto updateTask(TaskSaveDto task) {
-        TaskEntity saveTaskEntity = null;
-        if (task.getId() != null) {
-            Optional<TaskEntity> taskEntityOptional = taskRepoInterface.findById(task.getId());
-            if (taskEntityOptional.isPresent()) {
-                if (task.getName() != null) {
-                    if(!task.getName().equals(taskEntityOptional.get().getName()))
-                        taskEntityOptional.get().setName(task.getName());
-                    else
-                        throw new CustomException("023","Name Error","Must Enter New Name ");
+    public TaskSaveDto updateTask(TaskSaveDto task) {
+        Optional<TaskEntity> taskEntityOptional = taskRepoInterface.findById(task.getId());     //task from database
+        List<TaskSaveDto> taskEntityOptionalList =taskEntityOptional.stream().map(Task->modelMapper.map(Task,TaskSaveDto.class)).toList();
+
+         List<TaskEntity> taskEntityList = taskRepoInterface.findMyQuery(task.getEmployeeId());
+         List<TaskSaveDto> taskSaveDtoList =taskEntityList.stream().map(Task->modelMapper.map(Task,TaskSaveDto.class)).toList(); //all employee task
+
+        if (taskEntityOptional.isPresent()) {
+            if (taskSaveDtoList.stream().anyMatch(Task -> Task.getEmployeeId().equals(taskEntityOptionalList.get(0).getEmployeeId()))){
+                TaskEntity saveTaskEntity = null;
+                    if (task.getId() != null) {
+                        if (!task.getName().isEmpty())
+                            taskEntityOptional.get().setName(task.getName());
+                        if (!task.getDescription().isEmpty())
+                            taskEntityOptional.get().setDescription(task.getDescription());
+                        if (!task.getDate().isEmpty()) {
+                            if(task.getDate().matches("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$"))
+                                taskEntityOptional.get().setDate(task.getDate());
+                            else
+                                throw new CustomException("025","Date Error","Must Enter New date with  Form dd/MM/yyyy");
+                        }
+                        saveTaskEntity = taskRepoInterface.save(taskEntityOptional.get());
+                    }else
+                        throw new CustomException ("021","Not Found Task","miss this Task data");
+                    return modelMapper.map(saveTaskEntity, TaskSaveDto.class);
+                } else {
+                    throw new CustomException("044", "Not Allowed", "Must update only your tasks");
                 }
-                if (task.getDescription() != null) {
-                    if(!task.getDescription().equals(taskEntityOptional.get().getDescription()))
-                         taskEntityOptional.get().setDescription(task.getDescription());
-                    else throw new CustomException("024","Description Error","Must Enter New Description ");
-                }
-                if (task.getDate() != null) {
-                    if(!task.getDate().equals(taskEntityOptional.get().getDate()) && taskEntityOptional.get().getDate().matches("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$"))
-                        taskEntityOptional.get().setDate(task.getDate());
-                    else throw new CustomException("025","Date Error","Must Enter New date with  Form dd/MM/yyyy");
-                }
-                if (task.getEmployeeId() != null) {
-                    Optional<EmployeeEntity> employeeEntityOptional = employeeRepoInterface.findById(task.getEmployeeId());
-                    if(!task.getEmployeeId().equals(taskEntityOptional.get().getId())&&employeeEntityOptional.isPresent())
-                        taskEntityOptional.get().setEmployeeEntity(employeeEntityOptional.get());
-                    else
-                        throw new CustomException("026","Employee Not Found","Must Enter New Employee Id ");
-                }
-            }else
-                throw new CustomException("022","Miss Task","No Employee with id : "+task.getId());
-            saveTaskEntity = taskRepoInterface.save(taskEntityOptional.get());
-        }else
-            throw new CustomException ("021","Not Found Task","miss this Task data");
-        return modelMapper.map(saveTaskEntity, TaskDto.class);
+        } else {
+            throw new CustomException("031", "Not Found Task", "No Task with id : " + task.getId() + " to delete it");
+        }
     }
    @Override
    public TaskDto deleteTask(@ModelAttribute("employeeEmail") String email, Long id) {
        Optional<TaskEntity> taskEntityOptional = taskRepoInterface.findById(id);
-
        if (taskEntityOptional.isPresent()) {
            TaskSaveDto taskSaveDto = modelMapper.map(taskEntityOptional.get(), TaskSaveDto.class);
            Optional<EmployeeEntity> employeeSaveDto = employeeRepoInterface.findById(taskSaveDto.getEmployeeId());

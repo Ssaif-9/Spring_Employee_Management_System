@@ -49,16 +49,12 @@ public class TaskViewController {
        List<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
        if(!employeeEntity.isEmpty()){
            EmployeeEntity employeeEntity1 = employeeEntity.get(0);
-         EmployeeSaveDto employeeSaveDto=  modelMapper.map(employeeEntity1,EmployeeSaveDto.class);
-           System.out.println("email "+email);
-           System.out.println("employeeSaveDto "+employeeSaveDto.getId());
-
+           EmployeeSaveDto employeeSaveDto=  modelMapper.map(employeeEntity1,EmployeeSaveDto.class);
            model.addAttribute("task", new TaskSaveDto(employeeSaveDto.getId()));
            return "addTask";
        }
        else
            throw new CustomException("000","not found","No Employee Found");
-
     }
 
     @PostMapping("/add")
@@ -84,6 +80,26 @@ public class TaskViewController {
             taskServiceInterface.deleteTask(email,taskSaveDto.getId());
             model.addAttribute("task",taskSaveDto.getId());
             return "redirect:/employee/userHome";
+    }
+
+    @GetMapping("/update")
+    public String getUpdateTask(@ModelAttribute("employeeEmail") String email,Model model){
+        List<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
+        if(!employeeEntity.isEmpty()){
+            EmployeeEntity employeeEntity1 = employeeEntity.get(0);
+            EmployeeSaveDto employeeSaveDto=  modelMapper.map(employeeEntity1,EmployeeSaveDto.class);
+            model.addAttribute("task", new TaskSaveDto(employeeSaveDto.getId()));
+            return "updateTask";
+        }
+        else
+            throw new CustomException("000","not found","No Employee Found");
+    }
+
+    @PostMapping("/update")
+    public String UpdateTask(TaskSaveDto taskSaveDtoArgu ,Model model){
+        TaskSaveDto taskSaveDto = taskServiceInterface.updateTask(taskSaveDtoArgu);
+        model.addAttribute("task",taskSaveDto);
+        return "redirect:/employee/userHome";
     }
 
     @ExceptionHandler(value = CustomException.class)
