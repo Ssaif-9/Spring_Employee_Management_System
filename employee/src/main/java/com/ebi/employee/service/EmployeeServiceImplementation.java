@@ -187,7 +187,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
         Optional<EmployeeEntity> employeeEntityOptional = employeeRepoInterface.findByEmailAndPhone(email, phone);
         if (employeeEntityOptional.isPresent()) {
             EmployeeEntity employeeEntity = employeeEntityOptional.get();
-            if (employeeEntity.getEmail().equals("admin@admin.com") && employeeEntity.getPhone().equals("00000000000"))
+            if (employeeEntity.getEmail().equals("admin@admin.com") && employeeEntity.getPhone().equals("01000000000"))
                 return "admin";
             else
                 return "user";
