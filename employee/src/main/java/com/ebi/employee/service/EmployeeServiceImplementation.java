@@ -108,13 +108,20 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
 
     @Override
     public EmployeeDto saveEmployee(EmployeeSaveDto employee) {
-        EmployeeEntity employeeEntity = modelMapper.map(employee, EmployeeEntity.class);
-        if (employeeEntity.getPhone().length() != 11 || !employeeEntity.getPhone().startsWith("01"))
-            throw new CustomException("021", "Phone Number Error", "Phone number must be 11 digit and start with 01");
-        if (!employeeEntity.getEmail().contains(".com") || !employeeEntity.getEmail().contains("@"))
-            throw new CustomException("022", "Email Address Error", "Email Address contains @ and .com");
-        employeeRepoInterface.save(employeeEntity);
-        return modelMapper.map(employeeEntity, EmployeeDto.class);
+        List<EmployeeEntity> employeeEntityList = employeeRepoInterface.findByEmail(employee.getEmail());
+        if(employeeEntityList.isEmpty())
+        {
+            EmployeeEntity employeeEntity = modelMapper.map(employee, EmployeeEntity.class);
+            if (employeeEntity.getPhone().length() != 11 || !employeeEntity.getPhone().startsWith("01"))
+                throw new CustomException("021", "Phone Number Error", "Phone number must be 11 digit and start with 01");
+            if (!employeeEntity.getEmail().contains(".com") || !employeeEntity.getEmail().contains("@"))
+                throw new CustomException("022", "Email Address Error", "Email Address contains @ and .com");
+            employeeRepoInterface.save(employeeEntity);
+            return modelMapper.map(employeeEntity, EmployeeDto.class);
+        }
+        else
+            throw new CustomException("05", "Email", " This Email used before please enter another Email ");
+
     }
 
     @Override
