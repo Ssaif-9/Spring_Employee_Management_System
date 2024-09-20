@@ -4,7 +4,6 @@ import com.ebi.employee.exception.CustomException;
 import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.model.EmployeeSaveDto;
-import com.ebi.employee.model.GeneralResponse;
 import com.ebi.employee.repo.EmployeeRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

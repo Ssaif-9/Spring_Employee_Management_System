@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,25 +24,22 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TaskServiceImplementation implements TaskServiceInterface {
 
-
-
     private final TaskRepoInterface taskRepoInterface;
     private final ModelMapper modelMapper;
     private final EmployeeRepoInterface employeeRepoInterface;
 
     public List<TaskSaveDto> getAllTask (){
         List<TaskEntity> taskEntityList =taskRepoInterface.findAll();
-
         return taskEntityList.stream().map(Task->modelMapper
                         .map(Task,TaskSaveDto.class))
                         .collect(Collectors.toList());
     }
+
     public List<TaskSaveDto> getEmployeeTasks(Long employeeId){
         List<TaskEntity> taskEntityList =taskRepoInterface.findMyQuery(employeeId);
             return taskEntityList.stream().map(Task->modelMapper
                             .map(Task,TaskSaveDto.class))
                             .collect(Collectors.toList());
-
     }
 
     public TaskDto addTask(TaskSaveDto task) {
@@ -93,6 +89,7 @@ public class TaskServiceImplementation implements TaskServiceInterface {
             throw new CustomException("031", "Not Found Task", "No Task with id : " + task.getId() + " to delete it",HttpStatus.NOT_FOUND);
         }
     }
+
    @Override
    public TaskDto deleteTask(@ModelAttribute("employeeEmail") String email, Long id) {
        Optional<TaskEntity> taskEntityOptional = taskRepoInterface.findById(id);

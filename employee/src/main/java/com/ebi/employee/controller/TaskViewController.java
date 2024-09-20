@@ -7,14 +7,12 @@ import com.ebi.employee.model.GeneralResponse;
 import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
 import com.ebi.employee.service.TaskServiceInterface;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,21 +35,19 @@ public class TaskViewController {
 
 
     @GetMapping("/list")
-    public String getAllEmployeesWithView(Model model){
+    public String getAllTask(Model model){
         List<TaskSaveDto> taskSaveDtoList = taskServiceInterface.getAllTask();
         GeneralResponse<List<TaskSaveDto>> response =new GeneralResponse<>(GetCode,GetMessage,taskSaveDtoList);
         model.addAttribute("response",response);
         return "listTask";
     }
 
-
     @GetMapping("/add")
     public String getAddTask(@ModelAttribute("employeeEmail") String email, Model model){
        List<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
        if(!employeeEntity.isEmpty()){
-           EmployeeEntity employeeEntity1 = employeeEntity.get(0);
-           EmployeeSaveDto employeeSaveDto=  modelMapper.map(employeeEntity1,EmployeeSaveDto.class);
-           model.addAttribute("task", new TaskSaveDto(employeeSaveDto.getId()));
+           EmployeeEntity employeeEntityFirst = employeeEntity.get(0);
+           model.addAttribute("task", new TaskSaveDto(employeeEntityFirst.getId()));
            return "addTask";
        }
        else
@@ -59,11 +55,10 @@ public class TaskViewController {
     }
 
     @PostMapping("/add")
-    public String AddTask(TaskSaveDto taskSaveDto ,Model model){
+    public String AddTask(TaskSaveDto taskSaveDto ){
         Optional<EmployeeEntity> employeeSaveDto =employeeRepoInterface.findById(taskSaveDto.getEmployeeId());
        if(employeeSaveDto.isPresent()){
             taskServiceInterface.addTask(taskSaveDto);
-            model.addAttribute("task",taskSaveDto);
             return "redirect:/employee/userHome";
         }
         else
@@ -77,9 +72,8 @@ public class TaskViewController {
     }
 
     @PostMapping("/delete")
-    public String DeleteTask(@ModelAttribute("employeeEmail") String email,TaskSaveDto taskSaveDto , Model model){
+    public String DeleteTask(@ModelAttribute("employeeEmail") String email,TaskSaveDto taskSaveDto){
             taskServiceInterface.deleteTask(email,taskSaveDto.getId());
-            model.addAttribute("task",taskSaveDto.getId());
             return "redirect:/employee/userHome";
     }
 
@@ -87,9 +81,8 @@ public class TaskViewController {
     public String getUpdateTask(@ModelAttribute("employeeEmail") String email,Model model){
         List<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
         if(!employeeEntity.isEmpty()){
-            EmployeeEntity employeeEntity1 = employeeEntity.get(0);
-            EmployeeSaveDto employeeSaveDto=  modelMapper.map(employeeEntity1,EmployeeSaveDto.class);
-            model.addAttribute("task", new TaskSaveDto(employeeSaveDto.getId()));
+            EmployeeEntity employeeEntityFirst = employeeEntity.get(0);
+            model.addAttribute("task", new TaskSaveDto(employeeEntityFirst.getId()));
             return "updateTask";
         }
         else
@@ -97,9 +90,8 @@ public class TaskViewController {
     }
 
     @PostMapping("/update")
-    public String UpdateTask(TaskSaveDto taskSaveDtoArgu ,Model model){
-        TaskSaveDto taskSaveDto = taskServiceInterface.updateTask(taskSaveDtoArgu);
-        model.addAttribute("task",taskSaveDto);
+    public String UpdateTask(TaskSaveDto taskSaveDtoArgu){
+        taskServiceInterface.updateTask(taskSaveDtoArgu);
         return "redirect:/employee/userHome";
     }
 
