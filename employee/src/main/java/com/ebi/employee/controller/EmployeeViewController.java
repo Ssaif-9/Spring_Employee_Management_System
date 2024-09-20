@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-
 @Controller
 @SessionAttributes("employeeEmail")
 @RequestMapping("/employee")
@@ -21,11 +21,25 @@ public class EmployeeViewController {
     private final EmployeeServiceInterface employeeServiceInterface;
     private final TaskServiceInterface taskServiceInterface;
 
+    @Value("${Success.Add.code}")
+    private String AddCode;
+    @Value("${Success.Add.Message}")
+    private String AddMessage;
+
+    @Value("${Success.Delete.code}")
+    private String DeleteCode;
+    @Value("${Success.Delete.Message}")
+    private String DeleteMessage;
 
     @Value("${Success.Get.code}")
     private String GetCode;
     @Value("${Success.Get.Message}")
     private String GetMessage;
+
+    @Value("${Success.Update.code}")
+    private String UpdateCode;
+    @Value("${Success.Update.Message}")
+    private String UpdateMessage;
 
 
     @GetMapping("/adminHome")
@@ -57,8 +71,9 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/add")
-    public String addEmployee( EmployeeSaveDto employeeSaveDto){
-       employeeServiceInterface.saveEmployee(employeeSaveDto);
+    public String addEmployee( EmployeeSaveDto employeeSaveDto, Model model){
+        EmployeeDto employeeDto=employeeServiceInterface.saveEmployee(employeeSaveDto);
+        model.addAttribute("employee", new EmployeeDto());
         return "redirect:list";
     }
 
@@ -69,8 +84,9 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/delete")
-    public String deleteEmployee( EmployeeSaveDto employeeSaveDto){
-        employeeServiceInterface.deleteEmployee(employeeSaveDto.getId());
+    public String deleteEmployee( EmployeeSaveDto employeeSaveDto, Model model){
+        EmployeeDto employeeDto=employeeServiceInterface.deleteEmployee(employeeSaveDto.getId());
+        model.addAttribute("employee", employeeSaveDto.getId());
         return "redirect:list";
     }
 
@@ -81,8 +97,9 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/search")
-    public String searchEmployee( EmployeeSaveDto employeeSaveDto){
-       employeeServiceInterface.getEmployeeById(employeeSaveDto.getId());
+    public String searchEmployee( EmployeeSaveDto employeeSaveDto, Model model){
+        EmployeeSaveDto employeeDto =employeeServiceInterface.getEmployeeById(employeeSaveDto.getId());
+        model.addAttribute("employee", employeeDto);
         return "subListEmployee";
     }
 
@@ -93,8 +110,9 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/searchByName")
-    public String searchByNameEmployee( EmployeeSaveDto employeeSaveDtoArgu){
-        employeeServiceInterface.getEmployeeByName(employeeSaveDtoArgu.getName());
+    public String searchByNameEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
+        List<EmployeeSaveDto> employeeSaveDtoList = employeeServiceInterface.getEmployeeByName(employeeSaveDtoArgu.getName());
+        model.addAttribute("employee", employeeSaveDtoList);
         return "subListEmployee";
     }
 
@@ -105,8 +123,9 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/searchByEmail")
-    public String searchByEmailEmployee( EmployeeSaveDto employeeSaveDtoArgu){
-      employeeServiceInterface.getEmployeeByEmail(employeeSaveDtoArgu.getEmail());
+    public String searchByEmailEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
+        List<EmployeeSaveDto> employeeSaveDto =employeeServiceInterface.getEmployeeByEmail(employeeSaveDtoArgu.getEmail());
+        model.addAttribute("employee", employeeSaveDto);
         return "subListEmployee";
     }
 
@@ -117,8 +136,9 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/searchByPhone")
-    public String searchByPhoneEmployee( EmployeeSaveDto employeeSaveDtoArgu){
-       employeeServiceInterface.getEmployeeByPhone(employeeSaveDtoArgu.getPhone());
+    public String searchByPhoneEmployee( EmployeeSaveDto employeeSaveDtoArgu, Model model){
+        List<EmployeeSaveDto> employeeSaveDto =employeeServiceInterface.getEmployeeByPhone(employeeSaveDtoArgu.getPhone());
+        model.addAttribute("employee", employeeSaveDto);
         return "subListEmployee";
     }
 
@@ -130,17 +150,19 @@ public class EmployeeViewController {
 
     @PostMapping("/searchBySalary")
     public String searchEmployeeBySalary( EmployeeSaveDto employeeSaveDtoArgu,String searchType,Model model) {
+        List<EmployeeSaveDto> employeeSaveDtoList =new ArrayList<EmployeeSaveDto>();
         switch (searchType) {
             case "equal":
-               employeeServiceInterface.getEmployeeBySalary(employeeSaveDtoArgu.getSalary());
+                employeeSaveDtoList = employeeServiceInterface.getEmployeeBySalary(employeeSaveDtoArgu.getSalary());
                 break;
             case "greater":
-               employeeServiceInterface.getEmployeeByGraterSalary(employeeSaveDtoArgu.getSalary());
+                employeeSaveDtoList = employeeServiceInterface.getEmployeeByGraterSalary(employeeSaveDtoArgu.getSalary());
                 break;
             case "less":
-               employeeServiceInterface.getEmployeeByLessSalary(employeeSaveDtoArgu.getSalary());
+                employeeSaveDtoList = employeeServiceInterface.getEmployeeByLessSalary(employeeSaveDtoArgu.getSalary());
                 break;
         }
+        model.addAttribute("employee", employeeSaveDtoList);
         return "subListEmployee"; // This view will display the result
     }
 
@@ -151,8 +173,9 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/update")
-    public String updateEmployee( EmployeeSaveDto employeeSaveDto){
+    public String updateEmployee( EmployeeSaveDto employeeSaveDto, Model model){
         employeeServiceInterface.updateEmployee(employeeSaveDto);
+        model.addAttribute("employee", new EmployeeDto());
         return "redirect:list";
     }
 
@@ -163,8 +186,9 @@ public class EmployeeViewController {
     }
 
     @PostMapping("/patch")
-    public String patchEmployee( EmployeeSaveDto employeeSaveDto){
-       employeeServiceInterface.patchUpdateEmployee(employeeSaveDto);
+    public String patchEmployee( EmployeeSaveDto employeeSaveDto, Model model){
+        EmployeeDto employeeDto=employeeServiceInterface.patchUpdateEmployee(employeeSaveDto);
+        model.addAttribute("employee", new EmployeeSaveDto());
         return "redirect:list";
     }
 
