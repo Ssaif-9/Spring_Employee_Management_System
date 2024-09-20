@@ -8,6 +8,7 @@ import com.ebi.employee.model.GeneralResponse;
 import com.ebi.employee.repo.EmployeeRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
         if (employeeEntity.isPresent())
             return modelMapper.map(employeeEntity.get(), EmployeeSaveDto.class);
         else
-            throw new CustomException("01", "Not Found", "No element of data has this ID : " + id);
+            throw new CustomException("01", "Not Found", "No element of data has this ID : " + id, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
                     .map(Employee -> modelMapper.map(Employee, EmployeeSaveDto.class))
                     .collect(Collectors.toList());
         else
-            throw new CustomException("02", "Not Found", "No element of data has this Name : " + name);
+            throw new CustomException("02", "Not Found", "No element of data has this Name : " + name, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
                     .map(Employee -> modelMapper.map(Employee, EmployeeSaveDto.class))
                     .collect(Collectors.toList());
         else
-            throw new CustomException("03", "Not Found", "No element of data has this Email : " + email);
+            throw new CustomException("03", "Not Found", "No element of data has this Email : " + email, HttpStatus.NOT_FOUND);
     }
 
     public List<EmployeeSaveDto> getEmployeeBySalary(String salary){
@@ -69,7 +70,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
                             .map(Employee, EmployeeSaveDto.class))
                     .collect(Collectors.toList());
         else
-            throw new CustomException("05", "Not Found", "No element of data has this Salary : " + salary);
+            throw new CustomException("05", "Not Found", "No element of data has this Salary : " + salary, HttpStatus.NOT_FOUND);
     }
 
     public List<EmployeeSaveDto> getEmployeeByGraterSalary(String salary){
@@ -79,7 +80,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
                     .map(Employee,EmployeeSaveDto.class))
                     .collect(Collectors.toList());
         else
-             throw new CustomException("05", "Not Found", "No Employee take : " + salary+" or More ");
+             throw new CustomException("05", "Not Found", "No Employee take : " + salary+" or More ", HttpStatus.NOT_FOUND);
     }
 
     public List<EmployeeSaveDto> getEmployeeByLessSalary(String salary){
@@ -89,7 +90,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
                             .map(Employee,EmployeeSaveDto.class))
                             .collect(Collectors.toList());
         else
-            throw new CustomException("05", "Not Found", "No Employee take : " + salary+" or Less ");
+            throw new CustomException("05", "Not Found", "No Employee take : " + salary+" or Less ", HttpStatus.NOT_FOUND);
 
     }
 
@@ -101,7 +102,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
                             .map(Employee, EmployeeSaveDto.class))
                     .collect(Collectors.toList());
         else
-            throw new CustomException("04", "Not Found", "No element of data has this Phone : " + phone);
+            throw new CustomException("04", "Not Found", "No element of data has this Phone : " + phone, HttpStatus.NOT_FOUND);
     }
 
 
@@ -113,14 +114,14 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
         {
             EmployeeEntity employeeEntity = modelMapper.map(employee, EmployeeEntity.class);
             if (employeeEntity.getPhone().length() != 11 || !employeeEntity.getPhone().startsWith("01"))
-                throw new CustomException("021", "Phone Number Error", "Phone number must be 11 digit and start with 01");
+                throw new CustomException("021", "Phone Number Error", "Phone number must be 11 digit and start with 01",HttpStatus.BAD_REQUEST);
             if (!employeeEntity.getEmail().contains(".com") || !employeeEntity.getEmail().contains("@"))
-                throw new CustomException("022", "Email Address Error", "Email Address contains @ and .com");
+                throw new CustomException("022", "Email Address Error", "Email Address contains @ and .com",HttpStatus.BAD_REQUEST);
             employeeRepoInterface.save(employeeEntity);
             return modelMapper.map(employeeEntity, EmployeeDto.class);
         }
         else
-            throw new CustomException("05", "Email", " This Email used before please enter another Email ");
+            throw new CustomException("05", "Email", " This Email used before please enter another Email ", HttpStatus.BAD_REQUEST);
 
     }
 
@@ -128,13 +129,13 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
     public EmployeeDto updateEmployee(EmployeeSaveDto employee) {
         Optional<EmployeeEntity> employeeSaveDto = employeeRepoInterface.findById(employee.getId());
         if (employeeSaveDto.isEmpty())
-            throw new CustomException("404", "Not Found", "No element of data has this ID to Update it .");
+            throw new CustomException("404", "Not Found", "No element of data has this ID to Update it .", HttpStatus.NOT_FOUND);
         else {
             EmployeeEntity employeeEntity = modelMapper.map(employee, EmployeeEntity.class);
             if (employeeEntity.getPhone().length() != 11 || !employeeEntity.getPhone().startsWith("01"))
-                throw new CustomException("047", "Phone Error", "Must Enter New Phone has 11 digit and start with 01");
+                throw new CustomException("047", "Phone Error", "Must Enter New Phone has 11 digit and start with 01",HttpStatus.BAD_REQUEST);
             if (!employeeEntity.getEmail().contains(".com") || !employeeEntity.getEmail().contains("@"))
-                throw new CustomException("046", "Email Error", "Must Enter New Email must include @ and .com");
+                throw new CustomException("046", "Email Error", "Must Enter New Email must include @ and .com",HttpStatus.BAD_REQUEST);
             EmployeeEntity employeeEntity1 = employeeRepoInterface.save(employeeEntity);
             return modelMapper.map(employeeEntity1, EmployeeDto.class);
         }
@@ -151,7 +152,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
                     if (!employee.getName().equals(employeeEntityOptional.get().getName()))
                         employeeEntityOptional.get().setName(employee.getName());
                     else
-                        throw new CustomException("043", "Name Error", "Must Enter New Name ");
+                        throw new CustomException("043", "Name Error", "Must Enter New Name ", HttpStatus.BAD_REQUEST);
                 }
                 if (!employee.getSalary().isEmpty()) {
                     employeeEntityOptional.get().setSalary(employee.getSalary());
@@ -163,19 +164,19 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
                     if (employee.getEmail().contains(".com") && employee.getEmail().contains("@"))
                         employeeEntityOptional.get().setEmail(employee.getEmail());
                     else
-                        throw new CustomException("046", "Email Error", "Must Enter New Email must include @ and .com");
+                        throw new CustomException("046", "Email Error", "Must Enter New Email must include @ and .com",HttpStatus.BAD_REQUEST);
                 }
                 if (!employee.getPhone().isEmpty()) {
                     if (employee.getPhone().length() == 11 && employee.getPhone().startsWith("01"))
                         employeeEntityOptional.get().setPhone(employee.getPhone());
                     else
-                        throw new CustomException("047", "Phone Error", "Must Enter New Phone has 11 digit and start with 01");
+                        throw new CustomException("047", "Phone Error", "Must Enter New Phone has 11 digit and start with 01",HttpStatus.BAD_REQUEST);
                 }
             } else
-                throw new CustomException("042", "Miss Employee", "No Employee with id : " + employee.getId());
+                throw new CustomException("042", "Miss Employee", "No Employee with id : " + employee.getId(), HttpStatus.NOT_FOUND);
             savedEmployeeEntity = employeeRepoInterface.save(employeeEntityOptional.get());
         } else
-            throw new CustomException("041", "Miss ID", "Must Send Employee ID");
+            throw new CustomException("041", "Miss ID", "Must Send Employee ID", HttpStatus.BAD_REQUEST);
         return modelMapper.map(savedEmployeeEntity, EmployeeDto.class);
     }
 
@@ -186,7 +187,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
             employeeRepoInterface.deleteById(id);
             return modelMapper.map(employeeEntityOptional.get(), EmployeeDto.class);
         } else
-            throw new CustomException("061", "Miss Employee", "No Employee with id : " + id + " to Delete it .");
+            throw new CustomException("061", "Miss Employee", "No Employee with id : " + id + " to Delete it .", HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -199,6 +200,6 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
             else
                 return "user";
         } else
-            throw new CustomException("999", "can not login", "User or password not found ");
+            throw new CustomException("999", "can not login", "User or password not found ", HttpStatus.NOT_FOUND);
     }
 }

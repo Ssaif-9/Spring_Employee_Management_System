@@ -14,9 +14,9 @@ public class GeneralException {
      * Check if ID Exist or not
      * */
     @ExceptionHandler(value = CustomException.class)
-    ResponseEntity<?> getEmployeeByIdExceptionHandler(CustomException employeeGetException) {
-        ErrorException errorException = new ErrorException(employeeGetException.getExceptionCode(), employeeGetException.getExceptionMessage(), employeeGetException.getExceptionDetail());
-        return new ResponseEntity<>(errorException, HttpStatus.NOT_FOUND);
+    ErrorException getEmployeeByIdExceptionHandler(CustomException employeeGetException) {
+        ErrorException errorException = new ErrorException(employeeGetException.getExceptionCode(), employeeGetException.getExceptionMessage(), employeeGetException.getExceptionDetail(),employeeGetException.getHttpStatus());
+        return errorException;
     }
 
 //    @ExceptionHandler(value = {Exception.class})

@@ -10,6 +10,7 @@ import com.ebi.employee.repo.EmployeeRepoInterface;
 import com.ebi.employee.repo.TaskRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -48,7 +49,7 @@ public class TaskServiceImplementation implements TaskServiceInterface {
     public TaskDto addTask(TaskSaveDto task) {
         TaskEntity taskEntity = modelMapper.map(task, TaskEntity.class);
         if (!taskEntity.getDate().matches("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$"))
-            throw new CustomException("011", "Date Form", "Please Enter Date Form dd/MM/yyyy");
+            throw new CustomException("011", "Date Form", "Please Enter Date Form dd/MM/yyyy", HttpStatus.BAD_REQUEST);
         Optional <EmployeeEntity> employeeEntityOptional = employeeRepoInterface.findById(task.getEmployeeId());
         if (employeeEntityOptional.isPresent()) {
             taskEntity.setEmployeeEntity(employeeRepoInterface.getById(task.getEmployeeId()));
@@ -56,7 +57,7 @@ public class TaskServiceImplementation implements TaskServiceInterface {
             return modelMapper.map(taskEntity, TaskDto.class);
         }
         else
-            throw new CustomException("012", "Employee Not Found", "Please Enter Employee who do this task");
+            throw new CustomException("012", "Employee Not Found", "Please Enter Employee who do this task",HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -79,17 +80,17 @@ public class TaskServiceImplementation implements TaskServiceInterface {
                             if(task.getDate().matches("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$"))
                                 taskEntityOptional.get().setDate(task.getDate());
                             else
-                                throw new CustomException("025","Date Error","Must Enter New date with  Form dd/MM/yyyy");
+                                throw new CustomException("025","Date Error","Must Enter New date with  Form dd/MM/yyyy",HttpStatus.BAD_REQUEST);
                         }
                         saveTaskEntity = taskRepoInterface.save(taskEntityOptional.get());
                     }else
-                        throw new CustomException ("021","Not Found Task","miss this Task data");
+                        throw new CustomException ("021","Not Found Task","miss this Task data",HttpStatus.NOT_FOUND);
                     return modelMapper.map(saveTaskEntity, TaskSaveDto.class);
                 } else {
-                    throw new CustomException("044", "Not Allowed", "Must update only your tasks");
+                    throw new CustomException("044", "Not Allowed", "Must update only your tasks",HttpStatus.BAD_REQUEST);
                 }
         } else {
-            throw new CustomException("031", "Not Found Task", "No Task with id : " + task.getId() + " to delete it");
+            throw new CustomException("031", "Not Found Task", "No Task with id : " + task.getId() + " to delete it",HttpStatus.NOT_FOUND);
         }
     }
    @Override
@@ -106,13 +107,13 @@ public class TaskServiceImplementation implements TaskServiceInterface {
                    taskRepoInterface.deleteById(id);
                    return modelMapper.map(taskEntityOptional.get(), TaskDto.class);
                } else {
-                   throw new CustomException("044", "Not Allowed", "Must delete only your tasks");
+                   throw new CustomException("044", "Not Allowed", "Must delete only your tasks",HttpStatus.BAD_REQUEST);
                }
            } else {
-               throw new CustomException("031", "Not Found Employee",    "No Employee found for this task");
+               throw new CustomException("031", "Not Found Employee",    "No Employee found for this task",HttpStatus.NOT_FOUND);
            }
        } else {
-           throw new CustomException("031", "Not Found Task", "No Task with id : " + id + " to delete it");
+           throw new CustomException("031", "Not Found Task", "No Task with id : " + id + " to delete it",HttpStatus.NOT_FOUND);
        }
    }
 

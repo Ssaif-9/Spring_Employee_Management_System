@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -54,7 +55,7 @@ public class TaskViewController {
            return "addTask";
        }
        else
-           throw new CustomException("000","not found","No Employee Found");
+           throw new CustomException("000","not found","No Employee Found", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/add")
@@ -66,7 +67,7 @@ public class TaskViewController {
             return "redirect:/employee/userHome";
         }
         else
-            throw new CustomException("001","not Exist Employee","Can not find employee who make this task ");
+            throw new CustomException("001","not Exist Employee","Can not find employee who make this task ",HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/delete")
@@ -92,7 +93,7 @@ public class TaskViewController {
             return "updateTask";
         }
         else
-            throw new CustomException("000","not found","No Employee Found");
+            throw new CustomException("000","not found","No Employee Found", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/update")
