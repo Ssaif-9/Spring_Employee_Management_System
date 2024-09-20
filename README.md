@@ -42,7 +42,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 After clone , change application.properties file and run program, open browser and search for [http://localhost:9090/login](http://localhost:9090/login).
 
-first you must click to sign up and add new User with email admin@admin.com and password 00000000000.
+first you must click to sign up and add new User with email admin@admin.com and password 01000000000.
 
 then you can login as a admin to add more employee.
 
