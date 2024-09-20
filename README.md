@@ -52,7 +52,7 @@ then you can login as a admin to add more employee.
 
 now you can take control as Admin and can list , add , update , search and delete employee.
 
-![Alt text](image/AdminPage2.png.png)
+![Alt text](image/AdminPage2.png)
 
 After add new employee you can login with this email and password to add new tasks.
 
