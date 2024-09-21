@@ -53,7 +53,6 @@ public class SignController {
             return "redirect:employee/userHome";
         }
     }
-
     /**
      * Displays the registration page.
      * @param model - The Model object used to pass data to the view.
