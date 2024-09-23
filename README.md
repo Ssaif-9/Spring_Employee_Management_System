@@ -40,7 +40,7 @@ spring.jpa.hibernate.ddl-auto=update
 ```
 ## Usage
 
-After clone , change application.properties file and run program, open browser and search for [http://localhost:9090/login](http://localhost:9090/login).
+After clone , change application.properties file and run program, open browser and search for [http://localhost:9090/EMS/login](http://localhost:9090/EMS/login).
 
 first you must click to sign up and add new User with email admin@admin.com and password 01000000000.
 
