@@ -59,7 +59,7 @@ After add new employee you can login with this email and password to add new tas
 ![Alt text](image/UserLogin.png)
 
 ##### note !! your password is a phone number 
-now you can take control as Admin and can add , delete and update Tasks.
+now you can take control as User and can add , delete and update Tasks.
 
 ![Alt text](image/UserPage.png)
 
