@@ -21,25 +21,10 @@ public class EmployeeViewController {
     private final EmployeeServiceInterface employeeServiceInterface;
     private final TaskServiceInterface taskServiceInterface;
 
-    @Value("${Success.Add.code}")
-    private String AddCode;
-    @Value("${Success.Add.Message}")
-    private String AddMessage;
-
-    @Value("${Success.Delete.code}")
-    private String DeleteCode;
-    @Value("${Success.Delete.Message}")
-    private String DeleteMessage;
-
     @Value("${Success.Get.code}")
     private String GetCode;
     @Value("${Success.Get.Message}")
     private String GetMessage;
-
-    @Value("${Success.Update.code}")
-    private String UpdateCode;
-    @Value("${Success.Update.Message}")
-    private String UpdateMessage;
 
 
     @GetMapping("/adminHome")

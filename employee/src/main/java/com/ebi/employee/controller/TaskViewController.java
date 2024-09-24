@@ -2,7 +2,6 @@ package com.ebi.employee.controller;
 
 import com.ebi.employee.entity.EmployeeEntity;
 import com.ebi.employee.exception.CustomException;
-import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.model.GeneralResponse;
 import com.ebi.employee.model.TaskSaveDto;
 import com.ebi.employee.repo.EmployeeRepoInterface;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @Controller
 @RequestMapping("/task")
 @SessionAttributes("employeeEmail")
@@ -26,7 +26,6 @@ public class TaskViewController {
 
     private final TaskServiceInterface taskServiceInterface;
     private final EmployeeRepoInterface employeeRepoInterface;
-    private final ModelMapper modelMapper;
 
     @Value("${Success.Get.code}")
     private String GetCode;

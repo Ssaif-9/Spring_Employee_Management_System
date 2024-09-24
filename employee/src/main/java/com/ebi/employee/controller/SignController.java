@@ -1,7 +1,6 @@
 package com.ebi.employee.controller;
 
 import com.ebi.employee.exception.CustomException;
-import com.ebi.employee.model.EmployeeDto;
 import com.ebi.employee.model.EmployeeSaveDto;
 import com.ebi.employee.service.EmployeeServiceInterface;
 import lombok.RequiredArgsConstructor;
