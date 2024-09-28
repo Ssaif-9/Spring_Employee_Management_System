@@ -76,6 +76,18 @@ public class TaskViewController {
             return "redirect:/employee/userHome";
     }
 
+//    @GetMapping("/deleteAll")
+//    public String getDeleteAllTask(Model model){
+//        model.addAttribute("task", new TaskSaveDto());
+//        return "deleteTask";
+//    }
+
+    @PostMapping("/deleteAll")
+    public String DeleteAllTask(@ModelAttribute("employeeEmail") String email,TaskSaveDto taskSaveDto){
+        taskServiceInterface.deleteAllTasksFormOneEmployee(email);
+        return "redirect:/employee/userHome";
+    }
+
     @GetMapping("/update")
     public String getUpdateTask(@ModelAttribute("employeeEmail") String email,Model model){
         List<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);

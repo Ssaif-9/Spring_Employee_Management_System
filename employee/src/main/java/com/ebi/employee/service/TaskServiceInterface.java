@@ -17,5 +17,7 @@ public interface TaskServiceInterface {
     TaskSaveDto updateTask(TaskSaveDto task);
 
     TaskDto deleteTask(String email,Long id);
+
+    void deleteAllTasksFormOneEmployee(String email);
 }
 

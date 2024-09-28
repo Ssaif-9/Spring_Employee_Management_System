@@ -114,4 +114,11 @@ public class TaskServiceImplementation implements TaskServiceInterface {
        }
    }
 
+
+    @Override
+    public void deleteAllTasksFormOneEmployee(@ModelAttribute("employeeEmail") String email){
+           List<EmployeeEntity> employeeSaveDto = employeeRepoInterface.findByEmail(email);
+           EmployeeSaveDto employeeSaveDto1 = modelMapper.map(employeeSaveDto.get(0), EmployeeSaveDto.class);
+           taskRepoInterface.deleteAllTaskForOneEmployee(employeeSaveDto1.getId());
+    }
 }
