@@ -15,7 +15,7 @@ public class CustomException extends RuntimeException {
     private String exceptionCode;
     private String exceptionMessage;
     private String exceptionDetail;
-    private HttpStatus httpStatus;
+    private HttpStatus exceptionhttpStatus;
 
 
 }
