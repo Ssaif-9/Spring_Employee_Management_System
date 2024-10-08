@@ -14,7 +14,7 @@ public interface EmployeeRepoInterface extends JpaRepository<EmployeeEntity,Long
 
     List<EmployeeEntity> findByName(String name);
 
-    List<EmployeeEntity> findByEmail(String email);
+    Optional<EmployeeEntity> findByEmail(String email);
 
     List<EmployeeEntity> findByPhone(String phone);
 

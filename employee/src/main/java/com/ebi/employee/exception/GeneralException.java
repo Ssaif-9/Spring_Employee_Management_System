@@ -9,7 +9,7 @@ public class GeneralException {
 
     @ExceptionHandler(value = CustomException.class)
     ErrorException getEmployeeByIdExceptionHandler(CustomException employeeGetException) {
-        ErrorException errorException = new ErrorException(employeeGetException.getExceptionCode(), employeeGetException.getExceptionMessage(), employeeGetException.getExceptionDetail(),employeeGetException.getExceptionhttpStatus());
+        ErrorException errorException = new ErrorException(employeeGetException.getExceptionCode(), employeeGetException.getExceptionMessage(), employeeGetException.getExceptionDetail(),employeeGetException.getExceptionHttpStatus());
         return errorException;
     }
 

@@ -53,8 +53,8 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
 
     @Override
     public List<EmployeeSaveDto> getEmployeeByEmail(String email) {
-        List<EmployeeEntity> employeeEntityList = employeeRepoInterface.findByEmail(email);
-        if (!employeeEntityList.isEmpty())
+        Optional<EmployeeEntity> employeeEntityList = employeeRepoInterface.findByEmail(email);
+        if (employeeEntityList.isPresent())
             return employeeEntityList.stream()
                     .map(Employee -> modelMapper.map(Employee, EmployeeSaveDto.class))
                     .collect(Collectors.toList());
@@ -108,7 +108,7 @@ public class EmployeeServiceImplementation implements  EmployeeServiceInterface 
 
     @Override
     public EmployeeDto saveEmployee(EmployeeSaveDto employee) {
-        List<EmployeeEntity> employeeEntityList = employeeRepoInterface.findByEmail(employee.getEmail());
+        Optional<EmployeeEntity> employeeEntityList = employeeRepoInterface.findByEmail(employee.getEmail());
         if(employeeEntityList.isEmpty())
         {
             EmployeeEntity employeeEntity = modelMapper.map(employee, EmployeeEntity.class);

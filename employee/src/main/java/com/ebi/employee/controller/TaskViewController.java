@@ -43,9 +43,9 @@ public class TaskViewController {
 
     @GetMapping("/add")
     public String getAddTask(@ModelAttribute("employeeEmail") String email, Model model){
-       List<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
-       if(!employeeEntity.isEmpty()){
-           EmployeeEntity employeeEntityFirst = employeeEntity.get(0);
+       Optional<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
+       if(employeeEntity.isPresent()){
+           EmployeeEntity employeeEntityFirst = employeeEntity.get();
            model.addAttribute("task", new TaskSaveDto(employeeEntityFirst.getId()));
            return "addTask";
        }
@@ -76,23 +76,19 @@ public class TaskViewController {
             return "redirect:/employee/userHome";
     }
 
-//    @GetMapping("/deleteAll")
-//    public String getDeleteAllTask(Model model){
-//        model.addAttribute("task", new TaskSaveDto());
-//        return "deleteTask";
-//    }
-
     @PostMapping("/deleteAll")
-    public String DeleteAllTask(@ModelAttribute("employeeEmail") String email,TaskSaveDto taskSaveDto){
+    public String getDeleteAllTask(@ModelAttribute("employeeEmail")String email){
         taskServiceInterface.deleteAllTasksFormOneEmployee(email);
         return "redirect:/employee/userHome";
     }
 
+
+
     @GetMapping("/update")
     public String getUpdateTask(@ModelAttribute("employeeEmail") String email,Model model){
-        List<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
-        if(!employeeEntity.isEmpty()){
-            EmployeeEntity employeeEntityFirst = employeeEntity.get(0);
+        Optional<EmployeeEntity> employeeEntity= employeeRepoInterface.findByEmail(email);
+        if(employeeEntity.isPresent()){
+            EmployeeEntity employeeEntityFirst = employeeEntity.get();
             model.addAttribute("task", new TaskSaveDto(employeeEntityFirst.getId()));
             return "updateTask";
         }

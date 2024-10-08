@@ -14,5 +14,5 @@ public class ErrorException {
     private String exceptionCode;
     private String exceptionMessage;
     private String exceptionDetail;
-    private HttpStatus exceptionhttpStatus;
+    private HttpStatus exceptionHttpStatus;
 }
