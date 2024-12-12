@@ -41,6 +41,7 @@ public class EmployeeViewController {
         return "userPage";
     }
 
+
     @GetMapping("/list")
     public String getAllEmployeesWithView(Model model){
         List<EmployeeSaveDto> employeeSaveDtoList = employeeServiceInterface.getAllEmployees();
